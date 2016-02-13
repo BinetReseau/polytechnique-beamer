@@ -1,0 +1,211 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerx}[2016/02/14 v1.0.0beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
+
+%=======================================================================
+% Declaration des options
+%=======================================================================
+\ProcessOptions*
+%=======================================================================
+% Package requis
+%=======================================================================
+\RequirePackage{calc}
+\RequirePackage{ifthen} % pour utiliser des booleens
+% \RequirePackage{ifpdf} % mode de compilation
+% \RequirePackage[pagestyles]{titlesec}
+\RequirePackage{graphicx}
+% \RequirePackage{geometry}
+\RequirePackage{xcolor}
+% \RequirePackage{lmodern}
+% \RequirePackage{multicol}
+% \RequirePackage{amsmath}
+% \RequirePackage{amssymb}
+% \RequirePackage{mathrsfs}
+% \RequirePackage{eso-pic}
+% \RequirePackage{transparent}
+\RequirePackage{xargs}
+\RequirePackage{tikz}
+% \RequirePackage{stmaryrd}
+\RequirePackage[hideothersubsections]{beamerthemeBerkeley}
+
+%=======================================================================
+% Definition des couleurs
+%=======================================================================
+\definecolor{bleu303}{RGB}{0,62,92}                
+\colorlet{darkbleu303}{black!20!bleu303}           
+\colorlet{lightbleu303}{white!20!bleu303}          
+\colorlet{ultralightbleu303}{white!80!bleu303}     
+\definecolor{rouge485}{RGB}{213,43,30}             
+\colorlet{darkrouge485}{black!20!rouge485}         
+\colorlet{lightrouge485}{white!20!rouge485}        
+\colorlet{ultralightrouge485}{white!80!rouge485}   
+\definecolor{vert575}{RGB}{107,126,81}             
+\colorlet{darkvert575}{black!20!vert575}           
+\colorlet{lightvert575}{white!20!vert575}          
+\colorlet{ultralightvert575}{white!80!vert575}     
+
+%=======================================================================
+% Definition du theme beamer
+%=======================================================================
+%---------- Couleurs propres au theme
+\colorlet{titlecolor}{white}
+\colorlet{boxtitle}{white}
+\colorlet{fgnormal}{black}
+\colorlet{bgnormal}{white}
+\colorlet{bglogo}{darkbleu303}
+\colorlet{bdyitemize}{black!80!white}
+\colorlet{sbdyitemize}{black}
+
+%---------- Parametres generaux
+\setbeamercovered{transparent=20}
+
+\usefonttheme{professionalfonts}
+\usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
+
+\usecolortheme[named=bleu303]{structure}
+
+%---------- Barre laterale
+\setbeamertemplate{sidebar canvas left}[default]
+\addtobeamertemplate{sidebar left}{}{%
+    \raisebox{1mm}{%
+        \makebox[16mm]{%
+            \color{white}%
+            \usebeamerfont{page number in head/foot}%
+            \insertframenumber/\inserttotalframenumber%
+        }%
+    }%
+}
+\setbeamercolor{sidebar left}{bg=bleu303}
+\setbeamercolor{title in sidebar}{fg=white}
+\setbeamercolor{author in sidebar}{fg=white}
+\setbeamercolor{subsection in sidebar}{bg=lightbleu303,fg=white}
+\setbeamercolor{section in sidebar}{bg=lightbleu303,fg=white}
+
+%---------- Couleurs generales
+\setbeamercolor{title}{fg=titlecolor}
+\setbeamercolor{normal text}{fg=fgnormal,bg=bgnormal}               
+\setbeamercolor{alerted text}{fg=rouge485}                          
+\setbeamercolor{logo}{bg=bglogo}                                    
+\setbeamercolor{itemize/enumerate body}{fg=bdyitemize}              
+\setbeamercolor{itemize/enumerate subbody}{fg=sbdyitemize}          
+\setbeamertemplate{itemize item}[circle]                            
+\setbeamertemplate{itemize subitem}[triangle]                       
+\setbeamertemplate{enumerate item}[square]                          
+\setbeamertemplate{enumerate subitem}[circle]                       
+\setbeamertemplate{navigation symbols}{}                            
+\setbeamertemplate{blocks}[shadow=false]                            
+\setbeamercolor{block title}{bg=bleu303,fg=boxtitle}                
+\setbeamercolor{block body}{bg=ultralightbleu303,fg=black}          
+\setbeamercolor{block title alerted}{bg=rouge485,fg=boxtitle}       
+\setbeamercolor{block body alerted}{bg=ultralightrouge485,fg=black} 
+\setbeamercolor{block title example}{bg=vert575,fg=boxtitle}        
+\setbeamercolor{block body example}{bg=ultralightvert575,fg=black}  
+
+%=======================================================================
+% Commandes de mise en page utilisateur
+%=======================================================================
+%---------- Informations sur le document
+\def\polytitresave{}
+\def\polysoustitresave{}
+\def\polyauteursave{}
+\def\polydatesave\today
+\def\polylogosave{\includegraphics[height=14mm]{beamerxwhitelogo}}
+\def\polylogotitresave{}
+\def\polylogopersosave{}
+
+%---------- Mise en page
+\let\oldtitle=\title
+\renewcommandx\title[3][1={},3={}]{
+    % use: \title[sous-titre]{titre}[titre court]
+    \renewcommand\polytitresave{#2}
+    \renewcommand\polysoustitresave{#1}
+    \oldtitle[#3]{#2}
+    \subtitle{#1}
+}
+
+\let\oldauthor=\author
+\renewcommandx\author[2][1={}]{
+    % use: \author[auteur court]{auteur}
+    \renewcommand\polyauteursave{#2}
+    \oldauthor{\rmfamily\bfseries #1}
+}
+
+% \let\olddate=\date
+\renewcommand\date[1]{
+    \renewcommand\polydatesave{#1}
+}
+
+\let\oldlogo=\logo
+\renewcommand\logo[1]{
+    \renewcommand\polylogopersosave{
+        \includegraphics[width=30mm,height=14mm,keepaspectratio]{#1}
+    }
+}
+\oldlogo{%
+    \hspace*{\paperwidth}%
+    \hspace*{-16mm}%
+    \makebox[\paperwidth]{%
+        \makebox[16mm]{%
+            \polylogosave{}%
+        }%
+        \hfill%
+        \makebox[32mm][r]{%
+            \polylogopersosave{}%
+        }%
+        \hspace*{1mm}%
+    }%
+}
+
+%---------- Maketitle
+\AtBeginDocument{
+    \renewcommand\maketitle{
+        {
+            \setlength{\unitlength}{0.1\paperheight}
+            \setbeamertemplate{background canvas}{%
+                \color{white}%
+                \begin{picture}(10,10)% fond
+                    \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}
+                \end{picture}%
+                \hspace*{-\paperheight}
+                \begin{minipage}[b]{\paperwidth}\sffamily
+                    \footnotesize \hspace*{1mm}\raisebox{1mm}{\polyauteursave}\hspace*{\fill}\raisebox{1mm}{\polydatesave}\hspace*{1mm}
+                \end{minipage}
+                \hspace*{-\paperwidth}
+                \tikz\node[remember picture, overlay, right] at (current page.west) {\includegraphics[height=0.33\paperheight]{beamerxwhitelogo}};
+            }%
+            \begin{frame}[plain,c]
+                \color{white}
+                \begin{flushright}\sffamily
+                    \begin{picture}(9,6)
+                        \put(0,2.95){% titre
+                            \makebox(9,3.05)[br]{%
+                                $\text{%
+                                    \bfseries%
+                                    \begin{minipage}{9\unitlength}%
+                                        \Large%
+                                        \setlength{\baselineskip}{0.7\baselineskip}%
+                                        \begin{flushright}%
+                                            \polytitresave%
+                                        \end{flushright}%
+                                    \end{minipage}%
+                                }$%
+                            }%
+                        }
+                        \put(0,0){% sous-titre
+                            \makebox(9,2.75)[tr]{%
+                                $\text{%
+                                    \begin{minipage}{9\unitlength}%
+                                        \setlength{\baselineskip}{0.7\baselineskip}%
+                                        \begin{flushright}%
+                                            \polysoustitresave%
+                                        \end{flushright}%
+                                    \end{minipage}%
+                                }$%
+                            }%
+                        }
+                    \end{picture}
+                \end{flushright}
+            \end{frame}
+        }
+    }
+    \setbeamertemplate{background canvas}{}
+}
