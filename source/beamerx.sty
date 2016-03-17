@@ -107,8 +107,7 @@
 \def\polytitresave{}
 \def\polysoustitresave{}
 \def\polyauteursave{}
-\def\polydatesave\today
-\def\polylogosave{\includegraphics[height=14mm]{beamerxwhitelogo}}
+\def\polydatesave{\today}
 \def\polylogotitresave{}
 \def\polylogopersosave{}
 
@@ -140,12 +139,13 @@
         \includegraphics[width=30mm,height=14mm,keepaspectratio]{#1}
     }
 }
+
 \oldlogo{%
     \hspace*{\paperwidth}%
     \hspace*{-16mm}%
     \makebox[\paperwidth]{%
         \makebox[16mm]{%
-            \polylogosave{}%
+            \includegraphics[height=14mm]{beamerxwhitelogo}%
         }%
         \hfill%
         \makebox[32mm][r]{%
@@ -167,7 +167,7 @@
                 \end{picture}%
                 \hspace*{-\paperheight}
                 \begin{minipage}[b]{\paperwidth}\sffamily
-                    \footnotesize \hspace*{1mm}\raisebox{1mm}{\polyauteursave}\hspace*{\fill}\raisebox{1mm}{\polydatesave}\hspace*{1mm}
+                    \footnotesize \hspace*{0mm}\raisebox{1mm}{\polyauteursave}\hspace*{\fill}\raisebox{1mm}{\polydatesave{}}\hspace*{3mm}
                 \end{minipage}
                 \hspace*{-\paperwidth}
                 \tikz\node[remember picture, overlay, right] at (current page.west) {\includegraphics[height=0.33\paperheight]{beamerxwhitelogo}};
