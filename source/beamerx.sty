@@ -158,6 +158,9 @@
 %---------- Maketitle
 \AtBeginDocument{
     \renewcommand\maketitle{
+        \ifdefined\shorthandoff
+            \shorthandoff{;!?:}
+        \fi
         {
             \setlength{\unitlength}{0.1\paperheight}
             \setbeamertemplate{background canvas}{%
@@ -206,6 +209,10 @@
                 \end{flushright}
             \end{frame}
         }
+        \ifdefined\shorthandon
+            \shorthandon{;!?:}
+        \fi
     }
     \setbeamertemplate{background canvas}{}
 }
+\endinput
