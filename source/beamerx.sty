@@ -30,18 +30,18 @@
 %=======================================================================
 % Definition des couleurs
 %=======================================================================
-\definecolor{bleu303}{RGB}{0,62,92}                
-\colorlet{darkbleu303}{black!20!bleu303}           
-\colorlet{lightbleu303}{white!20!bleu303}          
-\colorlet{ultralightbleu303}{white!80!bleu303}     
-\definecolor{rouge485}{RGB}{213,43,30}             
-\colorlet{darkrouge485}{black!20!rouge485}         
-\colorlet{lightrouge485}{white!20!rouge485}        
-\colorlet{ultralightrouge485}{white!80!rouge485}   
-\definecolor{vert575}{RGB}{107,126,81}             
-\colorlet{darkvert575}{black!20!vert575}           
-\colorlet{lightvert575}{white!20!vert575}          
-\colorlet{ultralightvert575}{white!80!vert575}     
+\definecolor{bleu303}{RGB}{0,62,92}
+\colorlet{darkbleu303}{black!20!bleu303}
+\colorlet{lightbleu303}{white!20!bleu303}
+\colorlet{ultralightbleu303}{white!80!bleu303}
+\definecolor{rouge485}{RGB}{213,43,30}
+\colorlet{darkrouge485}{black!20!rouge485}
+\colorlet{lightrouge485}{white!20!rouge485}
+\colorlet{ultralightrouge485}{white!80!rouge485}
+\definecolor{vert575}{RGB}{107,126,81}
+\colorlet{darkvert575}{black!20!vert575}
+\colorlet{lightvert575}{white!20!vert575}
+\colorlet{ultralightvert575}{white!80!vert575}
 
 %=======================================================================
 % Definition du theme beamer
@@ -56,7 +56,7 @@
 \colorlet{sbdyitemize}{black}
 
 %---------- Parametres generaux
-\setbeamercovered{transparent=20}
+\setbeamercovered{transparent=40}
 
 \usefonttheme{professionalfonts}
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
@@ -82,23 +82,23 @@
 
 %---------- Couleurs generales
 \setbeamercolor{title}{fg=titlecolor}
-\setbeamercolor{normal text}{fg=fgnormal,bg=bgnormal}               
-\setbeamercolor{alerted text}{fg=rouge485}                          
-\setbeamercolor{logo}{bg=bglogo}                                    
-\setbeamercolor{itemize/enumerate body}{fg=bdyitemize}              
-\setbeamercolor{itemize/enumerate subbody}{fg=sbdyitemize}          
-\setbeamertemplate{itemize item}[circle]                            
-\setbeamertemplate{itemize subitem}[triangle]                       
-\setbeamertemplate{enumerate item}[square]                          
-\setbeamertemplate{enumerate subitem}[circle]                       
-\setbeamertemplate{navigation symbols}{}                            
-\setbeamertemplate{blocks}[shadow=false]                            
-\setbeamercolor{block title}{bg=bleu303,fg=boxtitle}                
-\setbeamercolor{block body}{bg=ultralightbleu303,fg=black}          
-\setbeamercolor{block title alerted}{bg=rouge485,fg=boxtitle}       
-\setbeamercolor{block body alerted}{bg=ultralightrouge485,fg=black} 
-\setbeamercolor{block title example}{bg=vert575,fg=boxtitle}        
-\setbeamercolor{block body example}{bg=ultralightvert575,fg=black}  
+\setbeamercolor{normal text}{fg=fgnormal,bg=bgnormal}
+\setbeamercolor{alerted text}{fg=rouge485}
+\setbeamercolor{logo}{bg=bglogo}
+\setbeamercolor{itemize/enumerate body}{fg=bdyitemize}
+\setbeamercolor{itemize/enumerate subbody}{fg=sbdyitemize}
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{enumerate item}[square]
+\setbeamertemplate{enumerate subitem}[circle]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[shadow=false]
+\setbeamercolor{block title}{bg=bleu303,fg=boxtitle}
+\setbeamercolor{block body}{bg=ultralightbleu303,fg=black}
+\setbeamercolor{block title alerted}{bg=rouge485,fg=boxtitle}
+\setbeamercolor{block body alerted}{bg=ultralightrouge485,fg=black}
+\setbeamercolor{block title example}{bg=vert575,fg=boxtitle}
+\setbeamercolor{block body example}{bg=ultralightvert575,fg=black}
 
 %=======================================================================
 % Commandes de mise en page utilisateur
@@ -112,8 +112,8 @@
 \def\polylogopersosave{}
 
 %---------- Mise en page
-\let\oldtitle=\title
-\renewcommandx\title[3][1={},3={}]{
+\let\oldtitle=\title%
+\renewcommandx\title[3][1={},3={}]{%
     % use: \title[sous-titre]{titre}[titre court]
     \renewcommand\polytitresave{#2}
     \renewcommand\polysoustitresave{#1}
@@ -121,21 +121,21 @@
     \subtitle{#1}
 }
 
-\let\oldauthor=\author
-\renewcommandx\author[2][1={}]{
+\let\oldauthor=\author%
+\renewcommandx\author[2][1={}]{%
     % use: \author[auteur court]{auteur}
     \renewcommand\polyauteursave{#2}
     \oldauthor{\rmfamily\bfseries #1}
 }
 
 % \let\olddate=\date
-\renewcommand\date[1]{
+\renewcommand\date[1]{%
     \renewcommand\polydatesave{#1}
 }
 
-\let\oldlogo=\logo
-\renewcommand\logo[1]{
-    \renewcommand\polylogopersosave{
+\let\oldlogo=\logo%
+\renewcommand\logo[1]{%
+    \renewcommand\polylogopersosave{%
         \includegraphics[width=30mm,height=14mm,keepaspectratio]{#1}
     }
 }
@@ -156,19 +156,19 @@
 }
 
 %---------- Maketitle
-\AtBeginDocument{
-    \renewcommand\maketitle{
-        \ifdefined\shorthandoff
+\AtBeginDocument{%
+    \renewcommand\maketitle{%
+        \ifdefined\shorthandoff%
             \shorthandoff{;!?:}
         \fi
-        {
-            \setlength{\unitlength}{0.1\paperheight}
+        {%
+            \setlength{\unitlength}{0.00625\paperwidth}
             \setbeamertemplate{background canvas}{%
                 \color{white}%
-                \begin{picture}(10,10)% fond
+                \begin{picture}(160,90)% fond
                     \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}
                 \end{picture}%
-                \hspace*{-\paperheight}
+                \hspace*{-\paperwidth}
                 \begin{minipage}[b]{\paperwidth}\sffamily
                     \footnotesize \hspace*{0mm}\raisebox{1mm}{\polyauteursave}\hspace*{\fill}\raisebox{1mm}{\polydatesave{}}\hspace*{3mm}
                 \end{minipage}
@@ -178,6 +178,7 @@
             \begin{frame}[plain,c]
                 \color{white}
                 \begin{flushright}\sffamily
+                    \setlength{\unitlength}{0.1\paperheight}
                     \begin{picture}(9,6)
                         \put(0,2.95){% titre
                             \makebox(9,3.05)[br]{%
@@ -209,10 +210,95 @@
                 \end{flushright}
             \end{frame}
         }
-        \ifdefined\shorthandon
+        \ifdefined\shorthandon%
             \shorthandon{;!?:}
         \fi
     }
     \setbeamertemplate{background canvas}{}
 }
+
+%--------- XSection
+\newcommand{\xsubsection}[2][{}]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(0,0){%
+        \includegraphics[width=\paperwidth,keepaspectratio]{pei}%
+      }%
+      \put(0,0){%
+        \color{bleu303}\rule{\paperwidth}{0.5\paperheight}%
+      }%
+      \put(80,22.5){%
+        \makebox(0,0)[c]{%
+        \framebox(8,8)[c]{%
+          \color{lightbleu303}\includegraphics[height=\paperheight/14,keepaspectratio]{beamerxx}%
+        }%
+        }%
+      }%
+      \put(80,27){%
+        \makebox(0,0)[cb]{%
+        \framebox(120,18)[cb]{%
+          \begin{minipage}{120\unitlength}\centering%
+            \color{white}Ceci est une longue ligne de texte stupide, qui ne sert vraiment à rien, mais en vrai on s'en fout parce que c'est trop rigolo de taper de la merde\ldots%
+          \end{minipage}%
+        }%
+        }%
+      }%
+      \put(80,18){%
+        \makebox(0,0)[ct]{%
+        \framebox(120,18)[ct]{%
+          \begin{minipage}{120\unitlength}\centering%
+            \color{white}Ceci est une longue ligne de texte stupide, qui ne sert vraiment à rien, mais en vrai on s'en fout parce que c'est trop rigolo de taper de la merde\ldots%
+          \end{minipage}%
+        }%
+        }%
+      }%
+    \end{picture}%
+  }
+  \begin{frame}[plain,c]
+  \end{frame}
+  \setbeamertemplate{background canvas}{}
+  \ifthenelse{\equal{#1}{}}{%
+    \section{#2}%
+  }{%
+    \section[#1]{#2}%
+  }
+}
+
+\newcommand{\xsection}[2][{}]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(0,0){%
+        \includegraphics[width=\paperwidth,keepaspectratio]{welcome}%
+      }%
+      \put(0,67.5){%
+        \color{lightbleu303}\rule{\paperwidth}{0.25\paperheight}%
+      }%
+      \put(80,78.75){%
+        \makebox(0,0)[c]{%
+        \framebox(140,22.5)[c]{%
+          \begin{minipage}{140\unitlength}\centering%
+            Ceci est une longue ligne de texte stupide, qui ne sert vraiment à rien, mais en vrai on s'en fout parce que c'est trop rigolo de taper de la merde\ldots%
+          \end{minipage}%
+        }%
+        }%
+      }%
+    \end{picture}%
+  }
+  \begin{frame}[plain,c]
+  \end{frame}
+  \setbeamertemplate{background canvas}{}
+  \ifthenelse{\equal{#1}{}}{%
+    \section{#2}%
+  }{%
+    \section[#1]{#2}%
+  }
+}
+
+
+
+
+
+
 \endinput

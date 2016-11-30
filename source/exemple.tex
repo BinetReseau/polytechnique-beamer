@@ -1,0 +1,41 @@
+% vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb,noconfigs]{babel}
+
+\usepackage{lmodern,textcomp,ifthen,graphicx,enumitem}
+\usepackage{beamerx}
+
+\newcommand{\progress}{%
+  \begin{frame}{Progrès}{Vous êtes ici}
+    \tableofcontents[currentsection]
+  \end{frame}%
+}
+
+\title[Stage de seconde année à l'École polytechnique]
+      {Connecting things with Wizzilab}
+\author{Clément Durand}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{\polytitresave}{\polysoustitresave}
+  \tableofcontents
+\end{frame}
+
+\section[Découverte]{Découvrir une start-up}
+\progress{}
+
+\xsection[Short]{Long titre de section}
+
+\begin{frame}{Titre}{soustitre}
+  Héhé
+\end{frame}
+
+\xsubsection[Short]{Long titre de section}
+
+\begin{frame}{Titre}{soustitre}
+  Héhé
+\end{frame}
+
+\end{document}
