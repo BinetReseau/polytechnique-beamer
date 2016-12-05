@@ -1,0 +1,9 @@
+x Template : title
+x Template : xsection
+x Template : xsubsection
+o Template : xframe (basic)
+o Cleaning : title
+o Manage UpperCaseWithNewLine
+o Dimensions
+o One real color theme
+o Add the other themes
