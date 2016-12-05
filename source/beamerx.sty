@@ -13,7 +13,7 @@
 % \RequirePackage{ifpdf} % mode de compilation
 % \RequirePackage[pagestyles]{titlesec}
 \RequirePackage{graphicx}
-% \RequirePackage{geometry}
+\RequirePackage{geometry}
 \RequirePackage{xcolor}
 % \RequirePackage{lmodern}
 % \RequirePackage{multicol}
@@ -53,10 +53,21 @@
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
 \setbeamertemplate{navigation symbols}{}
 
+\setbeamersize{text margin left=3mm}
+\setbeamersize{text margin right=3mm}
+
 % \usecolortheme[named=bleu303]{structure}
 
 \setbeamertemplate{footline}{%
-  \textbf{ÉCOLE POLYTECHNIQUE}-- \insertshorttitle\hspace*{\fill}\insertframenumber%
+  \hspace*{1mm}%
+  \raisebox{1mm}{%
+    \textbf{ÉCOLE POLYTECHNIQUE}-- \insertshorttitle%
+  }%
+  \hspace*{\fill}
+  \raisebox{1mm}{%
+    \insertframenumber%
+  }%
+  \hspace*{1mm}%
 }
 \setbeamertemplate{logo}{LOGO}
 \setbeamertemplate{frametitle}{%
@@ -319,7 +330,7 @@
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
-      \put(155,85){%
+      \put(158,88){%
         \makebox(0,0)[rt]{%
           \color{lightbleu303}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%

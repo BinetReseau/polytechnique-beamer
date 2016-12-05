@@ -8,7 +8,7 @@ x Manage UpperCaseWithNewLine
   x title
   x xsection
   x xsubsection
-  o xframe
+  x xframe
   o checks by dircom
 o One real color theme
 o Add the other themes
