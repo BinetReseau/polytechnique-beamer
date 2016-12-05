@@ -4,6 +4,13 @@ x Template : xsubsection
 x Template : xframe (basic)
 x Cleaning : title
 x Manage UpperCaseWithNewLine
-o Dimensions
+- Dimensions
+  x title
+  x xsection
+  x xsubsection
+  o xframe
+  o checks by dircom
 o One real color theme
 o Add the other themes
+o Manage no-number in section
+o Manage no-subtitle in subsection
