@@ -3,7 +3,7 @@ x Template : xsection
 x Template : xsubsection
 x Template : xframe (basic)
 x Cleaning : title
-o Manage UpperCaseWithNewLine
+x Manage UpperCaseWithNewLine
 o Dimensions
 o One real color theme
 o Add the other themes
