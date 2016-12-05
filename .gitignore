@@ -158,3 +158,5 @@ pythontex-files-*/
 
 # Latexian
 TSWLatexianTemp*
+
+*.swp

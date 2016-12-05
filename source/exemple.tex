@@ -3,14 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[frenchb,noconfigs]{babel}
 
-\usepackage{lmodern,textcomp,ifthen,graphicx,enumitem}
 \usepackage{beamerx}
-
-\newcommand{\progress}{%
-  \begin{frame}{Progrès}{Vous êtes ici}
-    \tableofcontents[currentsection]
-  \end{frame}%
-}
+\usepackage{lipsum}
 
 \title[Stage de seconde année à l'École polytechnique]
       {Connecting things with Wizzilab}
@@ -19,23 +13,12 @@
 \begin{document}
 \maketitle
 
-\begin{frame}{\polytitresave}{\polysoustitresave}
-  \tableofcontents
-\end{frame}
+\xsection{bleu}{Titre de ma section}
 
-\section[Découverte]{Découvrir une start-up}
-\progress{}
+\xsubsection{bleu}{Titre de ma sous-section}{Sous-titre de ma sous-section}
 
-\xsection[Short]{Long titre de section}
-
-\begin{frame}{Titre}{soustitre}
-  Héhé
-\end{frame}
-
-\xsubsection[Short]{Long titre de section}
-
-\begin{frame}{Titre}{soustitre}
-  Héhé
+\begin{frame}{Control frame}{Checking everything works}
+  \lipsum[1-3]
 \end{frame}
 
 \end{document}

@@ -155,7 +155,10 @@
     }%
 }
 
-%---------- Maketitle
+%=======================================================================
+% Diapos conforme charte graphique
+%=======================================================================
+%--- Maketitle % TODO : clean
 \AtBeginDocument{%
     \renewcommand\maketitle{%
         \ifdefined\shorthandoff%
@@ -217,40 +220,120 @@
     \setbeamertemplate{background canvas}{}
 }
 
-%--------- XSection
-\newcommand{\xsubsection}[2][{}]{%
+%--- XSection
+% Prototype :
+% \xsection{color_choice}
+%          [short_title]
+%          {title}
+%          [picture]
+\newcommandx{\xsection}[4][{2={},4=welcome}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \section{#3}%
+  }{%
+    \section[#2]{#3}%
+  }%
+  \ifthenelse{\equal{#1}{bleu}}{%
+    \xsectionframe{lightbleu303}{white}{#4}{\arabic{section}}{#3}%
+  }{%
+  }
+}
+
+%- XSectionFrame
+% Prototype :
+% \xsectionframe{bg_color}
+%               {fg_color}
+%               {picture}
+%               {number}
+%               {title}
+\newcommand{\xsectionframe}[5]{%
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
       \put(0,0){%
-        \includegraphics[width=\paperwidth,keepaspectratio]{pei}%
+        \includegraphics[width=\paperwidth,keepaspectratio]{#3}%
+      }%
+      \put(0,60){%
+        \color{#1}\rule{\paperwidth}{\paperheight/3}%
+      }%
+      \put(80,75){%
+        \makebox(0,0)[cb]{%
+          \begin{minipage}{140\unitlength}\centering%
+            \Huge\sffamily\color{#2}#4%
+          \end{minipage}%
+        }%
+      }%
+      \put(80,70){%
+        \makebox(0,0)[ct]{%
+          \begin{minipage}{140\unitlength}\centering%
+            \Large\sffamily\color{#2}\MakeUppercase{#5}%
+          \end{minipage}%
+        }%
+      }%
+    \end{picture}%
+  }
+  \begin{frame}[plain,c]
+  \end{frame}
+  \setbeamertemplate{background canvas}{}
+}
+
+%--- XSubSection
+% Prototype :
+% \xsubsection{color_choice}
+%             [short_title]
+%             {title}
+%             {subtitle}
+%             [picture]
+\newcommandx{\xsubsection}[5][{2={},5=pei}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \section{#3}%
+  }{%
+    \section[#2]{#3}%
+  }%
+  \ifthenelse{\equal{#1}{bleu}}{%
+    \xsubsectionframe{lightbleu303}{darkbleu303}{white}{#5}{#3}{#4}%
+  }{%
+  }
+}
+%- XSubSectionFrame
+% Prototype :
+% \xsubsectionframe{bg_color}
+%                  {bg_altcolor}
+%                  {fg_color}
+%                  {picture}
+%                  {title}
+%                  {subtitle}
+\newcommand{\xsubsectionframe}[6]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(0,0){%
+        \includegraphics[width=\paperwidth,keepaspectratio]{#4}%
       }%
       \put(0,0){%
-        \color{bleu303}\rule{\paperwidth}{0.5\paperheight}%
+        \color{#1}\rule{\paperwidth}{0.5\paperheight}%
       }%
       \put(80,22.5){%
         \makebox(0,0)[c]{%
-        \framebox(8,8)[c]{%
-          \color{lightbleu303}\includegraphics[height=\paperheight/14,keepaspectratio]{beamerxx}%
+          \color{#3}\includegraphics[height=\paperheight/14,keepaspectratio]{beamerxx}%
         }%
+      }%
+      \put(160,22.5){%
+        \makebox(0,0)[c]{%
+          \color{#2}\includegraphics[height=3\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%
       }%
       \put(80,27){%
         \makebox(0,0)[cb]{%
-        \framebox(120,18)[cb]{%
           \begin{minipage}{120\unitlength}\centering%
-            \color{white}Ceci est une longue ligne de texte stupide, qui ne sert vraiment à rien, mais en vrai on s'en fout parce que c'est trop rigolo de taper de la merde\ldots%
+            \Large\rmfamily\color{#3}\MakeUppercase{#5}%
           \end{minipage}%
-        }%
         }%
       }%
       \put(80,18){%
         \makebox(0,0)[ct]{%
-        \framebox(120,18)[ct]{%
           \begin{minipage}{120\unitlength}\centering%
-            \color{white}Ceci est une longue ligne de texte stupide, qui ne sert vraiment à rien, mais en vrai on s'en fout parce que c'est trop rigolo de taper de la merde\ldots%
+            \large\rmfamily\color{#3}#6%
           \end{minipage}%
-        }%
         }%
       }%
     \end{picture}%
@@ -258,44 +341,7 @@
   \begin{frame}[plain,c]
   \end{frame}
   \setbeamertemplate{background canvas}{}
-  \ifthenelse{\equal{#1}{}}{%
-    \section{#2}%
-  }{%
-    \section[#1]{#2}%
-  }
 }
-
-\newcommand{\xsection}[2][{}]{%
-  \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(0,0){%
-        \includegraphics[width=\paperwidth,keepaspectratio]{welcome}%
-      }%
-      \put(0,67.5){%
-        \color{lightbleu303}\rule{\paperwidth}{0.25\paperheight}%
-      }%
-      \put(80,78.75){%
-        \makebox(0,0)[c]{%
-        \framebox(140,22.5)[c]{%
-          \begin{minipage}{140\unitlength}\centering%
-            Ceci est une longue ligne de texte stupide, qui ne sert vraiment à rien, mais en vrai on s'en fout parce que c'est trop rigolo de taper de la merde\ldots%
-          \end{minipage}%
-        }%
-        }%
-      }%
-    \end{picture}%
-  }
-  \begin{frame}[plain,c]
-  \end{frame}
-  \setbeamertemplate{background canvas}{}
-  \ifthenelse{\equal{#1}{}}{%
-    \section{#2}%
-  }{%
-    \section[#1]{#2}%
-  }
-}
-
 
 
 
