@@ -25,7 +25,7 @@
 \RequirePackage{xargs}
 \RequirePackage{tikz}
 % \RequirePackage{stmaryrd}
-\RequirePackage[hideothersubsections]{beamerthemeBerkeley}
+%\RequirePackage[hideothersubsections]{beamerthemeBerkeley}
 
 %=======================================================================
 % Definition des couleurs
@@ -46,59 +46,24 @@
 %=======================================================================
 % Definition du theme beamer
 %=======================================================================
-%---------- Couleurs propres au theme
-\colorlet{titlecolor}{white}
-\colorlet{boxtitle}{white}
-\colorlet{fgnormal}{black}
-\colorlet{bgnormal}{white}
-\colorlet{bglogo}{darkbleu303}
-\colorlet{bdyitemize}{black!80!white}
-\colorlet{sbdyitemize}{black}
-
 %---------- Parametres generaux
 \setbeamercovered{transparent=40}
 
 \usefonttheme{professionalfonts}
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
-
-\usecolortheme[named=bleu303]{structure}
-
-%---------- Barre laterale
-\setbeamertemplate{sidebar canvas left}[default]
-\addtobeamertemplate{sidebar left}{}{%
-    \raisebox{1mm}{%
-        \makebox[16mm]{%
-            \color{white}%
-            \usebeamerfont{page number in head/foot}%
-            \insertframenumber/\inserttotalframenumber%
-        }%
-    }%
-}
-\setbeamercolor{sidebar left}{bg=bleu303}
-\setbeamercolor{title in sidebar}{fg=white}
-\setbeamercolor{author in sidebar}{fg=white}
-\setbeamercolor{subsection in sidebar}{bg=lightbleu303,fg=white}
-\setbeamercolor{section in sidebar}{bg=lightbleu303,fg=white}
-
-%---------- Couleurs generales
-\setbeamercolor{title}{fg=titlecolor}
-\setbeamercolor{normal text}{fg=fgnormal,bg=bgnormal}
-\setbeamercolor{alerted text}{fg=rouge485}
-\setbeamercolor{logo}{bg=bglogo}
-\setbeamercolor{itemize/enumerate body}{fg=bdyitemize}
-\setbeamercolor{itemize/enumerate subbody}{fg=sbdyitemize}
-\setbeamertemplate{itemize item}[circle]
-\setbeamertemplate{itemize subitem}[triangle]
-\setbeamertemplate{enumerate item}[square]
-\setbeamertemplate{enumerate subitem}[circle]
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{blocks}[shadow=false]
-\setbeamercolor{block title}{bg=bleu303,fg=boxtitle}
-\setbeamercolor{block body}{bg=ultralightbleu303,fg=black}
-\setbeamercolor{block title alerted}{bg=rouge485,fg=boxtitle}
-\setbeamercolor{block body alerted}{bg=ultralightrouge485,fg=black}
-\setbeamercolor{block title example}{bg=vert575,fg=boxtitle}
-\setbeamercolor{block body example}{bg=ultralightvert575,fg=black}
+
+% \usecolortheme[named=bleu303]{structure}
+
+\setbeamertemplate{footline}{%
+  \textbf{ÉCOLE POLYTECHNIQUE}-- \insertshorttitle\hspace*{\fill}\insertframenumber%
+}
+\setbeamertemplate{logo}{LOGO}
+\setbeamertemplate{frametitle}{%
+  \sffamily\Large\color{bleu303}\insertframetitle\\
+  \sffamily\large\color{lightbleu303}\insertframesubtitle%
+}
+\setbeamertemplate{frametitle continuation}{this is the next part of the title}
 
 %=======================================================================
 % Commandes de mise en page utilisateur
@@ -117,7 +82,11 @@
     % use: \title[sous-titre]{titre}[titre court]
     \renewcommand\polytitresave{#2}
     \renewcommand\polysoustitresave{#1}
-    \oldtitle[#3]{#2}
+    \ifthenelse{\equal{#3}{}}{%
+      \oldtitle{#2}%
+    }{%
+      \oldtitle[#3]{#2}%
+    }
     \subtitle{#1}
 }
 
@@ -294,6 +263,7 @@
   }{%
   }
 }
+
 %- XSubSectionFrame
 % Prototype :
 % \xsubsectionframe{bg_color}
@@ -341,6 +311,23 @@
   \begin{frame}[plain,c]
   \end{frame}
   \setbeamertemplate{background canvas}{}
+}
+
+%--- XFrame
+\newenvironment{xframe}[2]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(155,85){%
+        \makebox(0,0)[rt]{%
+          \color{lightbleu303}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
+        }%
+      }%
+    \end{picture}%
+  }%
+  \begin{frame}{#1}{#2}%
+}{%
+  \end{frame}%
 }
 
 

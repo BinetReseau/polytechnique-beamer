@@ -1,7 +1,7 @@
 x Template : title
 x Template : xsection
 x Template : xsubsection
-o Template : xframe (basic)
+x Template : xframe (basic)
 o Cleaning : title
 o Manage UpperCaseWithNewLine
 o Dimensions
