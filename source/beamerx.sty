@@ -129,64 +129,57 @@
 %=======================================================================
 %--- Maketitle % TODO : clean
 \AtBeginDocument{%
-    \renewcommand\maketitle{%
-        \ifdefined\shorthandoff%
-            \shorthandoff{;!?:}
-        \fi
-        {%
-            \setlength{\unitlength}{0.00625\paperwidth}
-            \setbeamertemplate{background canvas}{%
-                \color{white}%
-                \begin{picture}(160,90)% fond
-                    \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}
-                \end{picture}%
-                \hspace*{-\paperwidth}
-                \begin{minipage}[b]{\paperwidth}\sffamily
-                    \footnotesize \hspace*{0mm}\raisebox{1mm}{\polyauteursave}\hspace*{\fill}\raisebox{1mm}{\polydatesave{}}\hspace*{3mm}
-                \end{minipage}
-                \hspace*{-\paperwidth}
-                \tikz\node[remember picture, overlay, right] at (current page.west) {\includegraphics[height=0.33\paperheight]{beamerxwhitelogo}};
-            }%
-            \begin{frame}[plain,c]
-                \color{white}
-                \begin{flushright}\sffamily
-                    \setlength{\unitlength}{0.1\paperheight}
-                    \begin{picture}(9,6)
-                        \put(0,2.95){% titre
-                            \makebox(9,3.05)[br]{%
-                                $\text{%
-                                    \bfseries%
-                                    \begin{minipage}{9\unitlength}%
-                                        \Large%
-                                        \setlength{\baselineskip}{0.7\baselineskip}%
-                                        \begin{flushright}%
-                                            \polytitresave%
-                                        \end{flushright}%
-                                    \end{minipage}%
-                                }$%
-                            }%
-                        }
-                        \put(0,0){% sous-titre
-                            \makebox(9,2.75)[tr]{%
-                                $\text{%
-                                    \begin{minipage}{9\unitlength}%
-                                        \setlength{\baselineskip}{0.7\baselineskip}%
-                                        \begin{flushright}%
-                                            \polysoustitresave%
-                                        \end{flushright}%
-                                    \end{minipage}%
-                                }$%
-                            }%
-                        }
-                    \end{picture}
-                \end{flushright}
-            \end{frame}
-        }
-        \ifdefined\shorthandon%
-            \shorthandon{;!?:}
-        \fi
+  \renewcommand\maketitle{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \setbeamertemplate{background canvas}{%
+      \color{white}%
+      \begin{picture}(160,90)%
+        \put(80,45){%
+          \makebox(0,0)[c]{%
+            \includegraphics[width=\paperwidth,keepaspectratio]{beamerxbackground}%
+          }%
+        }%
+        \put(15,45){%
+          \makebox(0,0)[c]{%
+            \color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}%
+          }%
+        }%
+        \put(1,1){%
+          \makebox(0,0)[lb]{%
+            \begin{minipage}{0.5\paperwidth}\noindent%
+              \sffamily\footnotesize\polyauteursave%
+            \end{minipage}%
+          }%
+        }%
+        \put(159,1){%
+          \makebox(0,0)[rb]{%
+            \begin{minipage}{0.5\paperwidth}\noindent\flushright%
+              \sffamily\footnotesize\polydatesave%
+            \end{minipage}%
+          }%
+        }%
+        \put(159,46){%
+          \makebox(0,0)[rb]{%
+            \begin{minipage}{0.75\paperwidth}\noindent\flushright%
+              \Large\setlength{\baselineskip}{0.7\baselineskip}%
+              \sffamily\bfseries\MakeUppercase{\polytitresave}%
+            \end{minipage}%
+          }%
+        }%
+        \put(159,47){%
+          \makebox(0,0)[rt]{%
+            \begin{minipage}{0.75\paperwidth}\noindent\flushright%
+              \setlength{\baselineskip}{0.7\baselineskip}%
+              \sffamily\polysoustitresave%
+            \end{minipage}%
+          }%
+        }%
+      \end{picture}%
     }
+    \begin{frame}[plain,c]
+    \end{frame}
     \setbeamertemplate{background canvas}{}
+  }
 }
 
 %--- XSection
