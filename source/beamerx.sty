@@ -230,8 +230,10 @@
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
-      \put(0,0){%
-        \includegraphics[width=\paperwidth,keepaspectratio]{#3}%
+      \put(80,0){%
+        \makebox(0,0)[cb]{%
+          \includegraphics[width=\paperwidth,keepaspectratio]{#3}%
+        }%
       }%
       \put(0,60){%
         \color{#1}\rule{\paperwidth}{\paperheight/3}%
@@ -288,8 +290,10 @@
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
-      \put(0,0){%
-        \includegraphics[width=\paperwidth,keepaspectratio]{#4}%
+      \put(80,90){%
+        \makebox(0,0)[ct]{%
+          \includegraphics[width=\paperwidth,keepaspectratio]{#4}%
+        }%
       }%
       \put(0,0){%
         \color{#1}\rule{\paperwidth}{0.5\paperheight}%
@@ -326,6 +330,10 @@
 }
 
 %--- XFrame
+% Prototype:
+% \begin{xframe}
+%       {title}
+%       {subtitle}
 \newenvironment{xframe}[2]{%
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
@@ -342,7 +350,35 @@
   \end{frame}%
 }
 
-
+%--- XPic
+% Prototype:
+% \begin{xpic}
+%       [size adjustment]
+%       {picture}
+\newenvironment{xpic}[2][hw]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(80,45){%
+        \makebox(0,0)[c]{%
+          \ifthenelse{\equal{#1}{hw}}{%
+            \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#2}%
+          }{\ifthenelse{\equal{#1}{wh}}{%
+            \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#2}%
+          }{\ifthenelse{\equal{#1}{h}}{%
+            \includegraphics[height=\paperheight]{#2}%
+          }{%
+            \includegraphics[width=\paperwidth]{#2}%
+          }}}%
+        }%
+      }%
+    \end{picture}
+  }%
+  \begin{frame}[plain,b]\centering%
+}{%
+    \vspace*{5mm}
+  \end{frame}%
+}
 
 
 
