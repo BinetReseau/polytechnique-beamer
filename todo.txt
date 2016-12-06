@@ -10,7 +10,7 @@ x Manage UpperCaseWithNewLine
   x xsubsection
   x xframe
   o checks by dircom
-o One real color theme
+x One real color theme
 o Add the other themes
 o Manage no-number in section
 o Manage no-subtitle in subsection
