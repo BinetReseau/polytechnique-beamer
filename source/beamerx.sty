@@ -224,12 +224,24 @@
     \begin{picture}(160,90)%
       \put(158,88){%
         \makebox(0,0)[rt]{%
-          \color{bleu303light}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
+          \color{gris428}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%
       }%
     \end{picture}%
   }%
 }%
+
+\setbeamertemplate{block begin}{%
+  \begin{minipage}{\textwidth}\flushleft%
+    \color{marron871}\raisebox{-0.5ex}{\includegraphics[width=2em]{beamerxfiletcourt}}\\
+    \color{rouge485}\rmfamily\bfseries\large%
+    \insertblocktitle{}
+
+    \color{bleu303}\sffamily\mdseries\normalsize%
+}
+\setbeamertemplate{block end}{%
+  \end{minipage}\vspace*{1mm}
+}
 
 %=======================================================================
 % Commandes de mise en page utilisateur
