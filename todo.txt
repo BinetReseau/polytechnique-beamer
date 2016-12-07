@@ -13,4 +13,4 @@ x Manage UpperCaseWithNewLine
 x One real color theme
 x Add the other themes
 x Manage no-number in section
-o Manage no-subtitle in subsection
+x Manage no-subtitle in subsection

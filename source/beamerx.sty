@@ -440,28 +440,43 @@
       \put(0,0){%
         \color{#1}\rule{\paperwidth}{0.5\paperheight}%
       }%
-      \put(80,22.5){%
-        \makebox(0,0)[c]{%
-          \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
-        }%
-      }%
       \put(160,22.5){%
         \makebox(0,0)[c]{%
           \color{#2}\includegraphics[height=3\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%
       }%
-      \put(80,28){%
-        \makebox(0,0)[cb]{%
-          \begin{minipage}{120\unitlength}\centering%
-            \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
-          \end{minipage}%
+      \ifthenelse{\equal{#6}{}}{%
+        \put(80,21){%
+          \makebox(0,0)[ct]{%
+            \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
+          }%
         }%
-      }%
-      \put(80,18){%
-        \makebox(0,0)[ct]{%
-          \begin{minipage}{120\unitlength}\centering%
-            \large\rmfamily\color{#3}#6%
-          \end{minipage}%
+        \put(80,24){%
+          \makebox(0,0)[cb]{%
+            \begin{minipage}{120\unitlength}\centering%
+              \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
+        }%
+      }{%
+        \put(80,22.5){%
+          \makebox(0,0)[c]{%
+            \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
+          }%
+        }%
+        \put(80,28){%
+          \makebox(0,0)[cb]{%
+            \begin{minipage}{120\unitlength}\centering%
+              \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
+        }%
+        \put(80,18){%
+          \makebox(0,0)[ct]{%
+            \begin{minipage}{120\unitlength}\centering%
+              \large\rmfamily\color{#3}#6%
+            \end{minipage}%
+          }%
         }%
       }%
     \end{picture}%
