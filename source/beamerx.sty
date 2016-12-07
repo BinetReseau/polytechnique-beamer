@@ -218,6 +218,19 @@
 }
 \setbeamertemplate{frametitle continuation}{this is the next part of the title}
 
+\newcommand\resetbackgroundcanvas{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(158,88){%
+        \makebox(0,0)[rt]{%
+          \color{bleu303light}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
+        }%
+      }%
+    \end{picture}%
+  }%
+}%
+
 %=======================================================================
 % Commandes de mise en page utilisateur
 %=======================================================================
@@ -315,7 +328,7 @@
     }
     \begin{frame}[plain,c]
     \end{frame}
-    \setbeamertemplate{background canvas}{}
+    \resetbackgroundcanvas{}
   }
 }
 
@@ -391,7 +404,7 @@
   }
   \begin{frame}[plain,c]
   \end{frame}
-  \setbeamertemplate{background canvas}{}
+  \resetbackgroundcanvas{}
 }
 
 %--- XSubSection
@@ -483,28 +496,7 @@
   }
   \begin{frame}[plain,c]
   \end{frame}
-  \setbeamertemplate{background canvas}{}
-}
-
-%--- XFrame
-% Prototype:
-% \begin{xframe}
-%       {title}
-%       {subtitle}
-\newenvironment{xframe}[2]{%
-  \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(158,88){%
-        \makebox(0,0)[rt]{%
-          \color{bleu303light}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
-        }%
-      }%
-    \end{picture}%
-  }%
-  \begin{frame}{#1}{#2}%
-}{%
-  \end{frame}%
+  \resetbackgroundcanvas{}
 }
 
 %--- XPic
@@ -518,15 +510,13 @@
     \begin{picture}(160,90)%
       \put(80,45){%
         \makebox(0,0)[c]{%
-          \ifthenelse{\equal{#1}{hw}}{%
-            \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#2}%
-          }{\ifthenelse{\equal{#1}{wh}}{%
-            \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#2}%
+          \ifthenelse{\equal{#1}{w}}{%
+            \includegraphics[width=\paperwidth]{#2}%
           }{\ifthenelse{\equal{#1}{h}}{%
             \includegraphics[height=\paperheight]{#2}%
           }{%
-            \includegraphics[width=\paperwidth]{#2}%
-          }}}%
+            \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#2}%
+          }}%
         }%
       }%
     \end{picture}
