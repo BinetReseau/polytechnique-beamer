@@ -12,5 +12,5 @@ x Manage UpperCaseWithNewLine
   o checks by dircom
 x One real color theme
 x Add the other themes
-o Manage no-number in section
+x Manage no-number in section
 o Manage no-subtitle in subsection

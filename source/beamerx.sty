@@ -325,13 +325,23 @@
 %          [short_title]
 %          {title}
 %          [picture]
-\newcommandx{\xsection}[4][{2={},4=welcome}]{%
+\def\xsection{\@ifstar\@@xsection\@xsection}
+\newcommandx{\@xsection}[4][{2={},4=welcome}]{%
   \ifthenelse{\equal{#2}{}}{%
     \section{#3}%
   }{%
     \section[#2]{#3}%
   }%
   \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{\arabic{section}}{#3}%
+}
+\newcommandx{\@@xsection}[4][{2={},4=welcome}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \section*{#3}%
+  }{%
+    \section*[#2]{#3}%
+  }%
+  \addtocounter{section}{-1}
+  \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{}{#3}%
 }
 
 %- XSectionFrame
@@ -353,18 +363,28 @@
       \put(0,60){%
         \color{#1}\rule{\paperwidth}{\paperheight/3}%
       }%
-      \put(80,75){%
-        \makebox(0,0)[cb]{%
-          \begin{minipage}{140\unitlength}\centering%
-            \Huge\sffamily\color{#2}#4%
-          \end{minipage}%
+      \ifthenelse{\equal{#4}{}}{%
+        \put(80,75){%
+          \makebox(0,0)[c]{%
+            \begin{minipage}{140\unitlength}\centering%
+              \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
         }%
-      }%
-      \put(80,70){%
-        \makebox(0,0)[ct]{%
-          \begin{minipage}{140\unitlength}\centering%
-            \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
-          \end{minipage}%
+      }{%
+        \put(80,75){%
+          \makebox(0,0)[cb]{%
+            \begin{minipage}{140\unitlength}\centering%
+              \Huge\sffamily\color{#2}#4%
+            \end{minipage}%
+          }%
+        }%
+        \put(80,70){%
+          \makebox(0,0)[ct]{%
+            \begin{minipage}{140\unitlength}\centering%
+              \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
         }%
       }%
     \end{picture}%
@@ -381,12 +401,22 @@
 %             {title}
 %             {subtitle}
 %             [picture]
-\newcommandx{\xsubsection}[5][{2={},5=pei}]{%
+\def\xsubsection{\@ifstar\@@xsubsection\@xsubsection}
+\newcommandx{\@xsubsection}[5][{2={},5=pei}]{%
   \ifthenelse{\equal{#2}{}}{%
-    \section{#3}%
+    \subsection{#3}%
   }{%
-    \section[#2]{#3}%
+    \subsection[#2]{#3}%
   }%
+  \xsubsectionframe{theme#1-bg}{theme#1-altbg}{theme#1-fg}{#5}{#3}{#4}%
+}
+\newcommandx{\@@xsubsection}[5][{2={},5=pei}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \subsection*{#3}%
+  }{%
+    \subsection*[#2]{#3}%
+  }%
+  \addtocounter{subsection}{-1}%
   \xsubsectionframe{theme#1-bg}{theme#1-altbg}{theme#1-fg}{#5}{#3}{#4}%
 }
 
