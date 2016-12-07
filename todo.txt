@@ -14,3 +14,4 @@ x One real color theme
 x Add the other themes
 x Manage no-number in section
 x Manage no-subtitle in subsection
+o No xframe : directly frame
