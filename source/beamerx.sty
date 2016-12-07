@@ -180,7 +180,6 @@
   }%
   \hspace*{1mm}%
 }
-\setbeamertemplate{logo}{LOGO}
 \setbeamertemplate{frametitle}{%
   \sffamily\Large\color{bleu303}\insertframetitle\\
   \sffamily\large\color{bleu303light}\insertframesubtitle%
@@ -195,8 +194,6 @@
 \def\polysoustitresave{}
 \def\polyauteursave{}
 \def\polydatesave{\today}
-\def\polylogotitresave{}
-\def\polylogopersosave{}
 
 %---------- Mise en page
 \newcommand{\MakeUppercaseWithNewline}[1]{%
@@ -230,28 +227,6 @@
 % \let\olddate=\date
 \renewcommand\date[1]{%
     \renewcommand\polydatesave{#1}
-}
-
-\let\oldlogo=\logo%
-\renewcommand\logo[1]{%
-    \renewcommand\polylogopersosave{%
-        \includegraphics[width=30mm,height=14mm,keepaspectratio]{#1}
-    }
-}
-
-\oldlogo{%
-    \hspace*{\paperwidth}%
-    \hspace*{-16mm}%
-    \makebox[\paperwidth]{%
-        \makebox[16mm]{%
-            \includegraphics[height=14mm]{beamerxwhitelogo}%
-        }%
-        \hfill%
-        \makebox[32mm][r]{%
-            \polylogopersosave{}%
-        }%
-        \hspace*{1mm}%
-    }%
 }
 
 %=======================================================================
