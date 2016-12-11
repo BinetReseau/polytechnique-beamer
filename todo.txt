@@ -1,0 +1,18 @@
+x Template : title
+x Template : xsection
+x Template : xsubsection
+x Template : xframe (basic)
+x Cleaning : title
+x Manage UpperCaseWithNewLine
+- Dimensions
+  x title
+  x xsection
+  x xsubsection
+  x xframe
+  o checks by dircom
+x One real color theme
+x Add the other themes
+x Manage no-number in section
+x Manage no-subtitle in subsection
+x No xframe : directly frame
+x Blocks

@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerx}[2016/02/14 v1.0.0beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
+\ProvidesPackage{beamerx}[2016/12/11 v2.0.0beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
 
 %=======================================================================
 % Declaration des options
@@ -10,95 +10,242 @@
 %=======================================================================
 \RequirePackage{calc}
 \RequirePackage{ifthen} % pour utiliser des booleens
-% \RequirePackage{ifpdf} % mode de compilation
-% \RequirePackage[pagestyles]{titlesec}
 \RequirePackage{graphicx}
-% \RequirePackage{geometry}
+\RequirePackage{geometry}
 \RequirePackage{xcolor}
-% \RequirePackage{lmodern}
-% \RequirePackage{multicol}
-% \RequirePackage{amsmath}
-% \RequirePackage{amssymb}
-% \RequirePackage{mathrsfs}
-% \RequirePackage{eso-pic}
-% \RequirePackage{transparent}
 \RequirePackage{xargs}
-\RequirePackage{tikz}
-% \RequirePackage{stmaryrd}
-\RequirePackage[hideothersubsections]{beamerthemeBerkeley}
 
 %=======================================================================
 % Definition des couleurs
 %=======================================================================
-\definecolor{bleu303}{RGB}{0,62,92}                
-\colorlet{darkbleu303}{black!20!bleu303}           
-\colorlet{lightbleu303}{white!20!bleu303}          
-\colorlet{ultralightbleu303}{white!80!bleu303}     
-\definecolor{rouge485}{RGB}{213,43,30}             
-\colorlet{darkrouge485}{black!20!rouge485}         
-\colorlet{lightrouge485}{white!20!rouge485}        
-\colorlet{ultralightrouge485}{white!80!rouge485}   
-\definecolor{vert575}{RGB}{107,126,81}             
-\colorlet{darkvert575}{black!20!vert575}           
-\colorlet{lightvert575}{white!20!vert575}          
-\colorlet{ultralightvert575}{white!80!vert575}     
+\definecolor{bleu303}{RGB}{0,62,92}
+\definecolor{bleu315}{RGB}{0,104,128}
+\definecolor{bleu3262}{RGB}{109,204,187}
+\definecolor{bleu5503}{RGB}{152,184,180}
+\definecolor{bleu317}{RGB}{212,232,239}
+\definecolor{gris11}{RGB}{66,66,66}
+\definecolor{gris10}{RGB}{99,99,99}
+\definecolor{gris8}{RGB}{155,155,155}
+\definecolor{gris428}{RGB}{197,197,197}
+\definecolor{rouge7427}{RGB}{169,32,33}
+\definecolor{rouge485}{RGB}{213,43,30}
+\definecolor{orange179}{RGB}{201,68,62}
+\definecolor{violet2622}{RGB}{77,22,84}
+\definecolor{violet5145}{RGB}{135,120,139}
+\definecolor{marron871}{RGB}{166,139,78}
+\definecolor{jaune110}{RGB}{210,175,36}
+\definecolor{jaune123}{RGB}{242,204,56}
+\definecolor{vert575}{RGB}{107,126,82}
+\definecolor{vert383}{RGB}{172,179,38}
+\definecolor{gris7}{RGB}{142,133,129}
+\definecolor{gris1}{RGB}{236,232,220}
+
+\definecolor{bleu303}{RGB}{0,58,86}
+\definecolor{bleu315}{RGB}{0,106,140}
+\definecolor{bleu3262}{RGB}{40,182,255}
+\definecolor{bleu5503}{RGB}{173,204,210}
+\definecolor{bleu317}{RGB}{218,238,239}
+\definecolor{gris11}{RGB}{115,114,114}
+\definecolor{gris10}{RGB}{134,133,134}
+\definecolor{gris8}{RGB}{171,171,172}
+\definecolor{gris428}{RGB}{218,220,222}
+\definecolor{rouge7427}{RGB}{179,4,48}
+\definecolor{rouge485}{RGB}{228,32,14}
+\definecolor{orange179}{RGB}{233,79,9}
+\definecolor{violet2622}{RGB}{89,15,85}
+\definecolor{violet5145}{RGB}{189,154,183}
+\definecolor{marron871}{RGB}{174,154,99}
+\definecolor{jaune110}{RGB}{244,207,0}
+\definecolor{jaune123}{RGB}{253,197,0}
+\definecolor{vert575}{RGB}{88,116,12}
+\definecolor{vert383}{RGB}{190,189,0}
+\definecolor{gris7}{RGB}{180,171,161}
+\definecolor{gris1}{RGB}{244,240,237}
+
+\colorlet{bleu303light}{white!20!bleu303}
+\colorlet{bleu315light}{white!20!bleu315}
+\colorlet{bleu317light}{white!20!bleu317}
+\colorlet{bleu3262light}{white!20!bleu3262}
+\colorlet{bleu5503light}{white!20!bleu5503}
+\colorlet{gris1light}{white!20!gris1}
+\colorlet{gris10light}{white!20!gris10}
+\colorlet{gris11light}{white!20!gris11}
+\colorlet{gris428light}{white!20!gris428}
+\colorlet{gris7light}{white!20!gris7}
+\colorlet{gris8light}{white!20!gris8}
+\colorlet{jaune110light}{white!20!jaune110}
+\colorlet{jaune123light}{white!20!jaune123}
+\colorlet{marron871light}{white!20!marron871}
+\colorlet{orange179light}{white!20!orange179}
+\colorlet{rouge485light}{white!20!rouge485}
+\colorlet{rouge7427light}{white!20!rouge7427}
+\colorlet{vert383light}{white!20!vert383}
+\colorlet{vert575light}{white!20!vert575}
+\colorlet{violet2622light}{white!20!violet2622}
+\colorlet{violet5145light}{white!20!violet5145}
+
+\colorlet{bleu303ultralight}{white!80!bleu303}
+\colorlet{bleu315ultralight}{white!80!bleu315}
+\colorlet{bleu317ultralight}{white!80!bleu317}
+\colorlet{bleu3262ultralight}{white!80!bleu3262}
+\colorlet{bleu5503ultralight}{white!80!bleu5503}
+\colorlet{gris1ultralight}{white!80!gris1}
+\colorlet{gris10ultralight}{white!80!gris10}
+\colorlet{gris11ultralight}{white!80!gris11}
+\colorlet{gris428ultralight}{white!80!gris428}
+\colorlet{gris7ultralight}{white!80!gris7}
+\colorlet{gris8ultralight}{white!80!gris8}
+\colorlet{jaune110ultralight}{white!80!jaune110}
+\colorlet{jaune123ultralight}{white!80!jaune123}
+\colorlet{marron871ultralight}{white!80!marron871}
+\colorlet{orange179ultralight}{white!80!orange179}
+\colorlet{rouge485ultralight}{white!80!rouge485}
+\colorlet{rouge7427ultralight}{white!80!rouge7427}
+\colorlet{vert383ultralight}{white!80!vert383}
+\colorlet{vert575ultralight}{white!80!vert575}
+\colorlet{violet2622ultralight}{white!80!violet2622}
+\colorlet{violet5145ultralight}{white!80!violet5145}
+
+\colorlet{bleu303dark}{black!20!bleu303}
+\colorlet{bleu315dark}{black!20!bleu315}
+\colorlet{bleu317dark}{black!20!bleu317}
+\colorlet{bleu3262dark}{black!20!bleu3262}
+\colorlet{bleu5503dark}{black!20!bleu5503}
+\colorlet{gris1dark}{black!20!gris1}
+\colorlet{gris10dark}{black!20!gris10}
+\colorlet{gris11dark}{black!20!gris11}
+\colorlet{gris428dark}{black!20!gris428}
+\colorlet{gris7dark}{black!20!gris7}
+\colorlet{gris8dark}{black!20!gris8}
+\colorlet{jaune110dark}{black!20!jaune110}
+\colorlet{jaune123dark}{black!20!jaune123}
+\colorlet{marron871dark}{black!20!marron871}
+\colorlet{orange179dark}{black!20!orange179}
+\colorlet{rouge485dark}{black!20!rouge485}
+\colorlet{rouge7427dark}{black!20!rouge7427}
+\colorlet{vert383dark}{black!20!vert383}
+\colorlet{vert575dark}{black!20!vert575}
+\colorlet{violet2622dark}{black!20!violet2622}
+\colorlet{violet5145dark}{black!20!violet5145}
+
+\colorlet{bleu303ultradark}{black!80!bleu303}
+\colorlet{bleu315ultradark}{black!80!bleu315}
+\colorlet{bleu317ultradark}{black!80!bleu317}
+\colorlet{bleu3262ultradark}{black!80!bleu3262}
+\colorlet{bleu5503ultradark}{black!80!bleu5503}
+\colorlet{gris1ultradark}{black!80!gris1}
+\colorlet{gris10ultradark}{black!80!gris10}
+\colorlet{gris11ultradark}{black!80!gris11}
+\colorlet{gris428ultradark}{black!80!gris428}
+\colorlet{gris7ultradark}{black!80!gris7}
+\colorlet{gris8ultradark}{black!80!gris8}
+\colorlet{jaune110ultradark}{black!80!jaune110}
+\colorlet{jaune123ultradark}{black!80!jaune123}
+\colorlet{marron871ultradark}{black!80!marron871}
+\colorlet{orange179ultradark}{black!80!orange179}
+\colorlet{rouge485ultradark}{black!80!rouge485}
+\colorlet{rouge7427ultradark}{black!80!rouge7427}
+\colorlet{vert383ultradark}{black!80!vert383}
+\colorlet{vert575ultradark}{black!80!vert575}
+\colorlet{violet2622ultradark}{black!80!violet2622}
+\colorlet{violet5145ultradark}{black!80!violet5145}
+
+\definecolor{themeviolet-bg}{RGB}{153,140,157}
+\definecolor{themeviolet-altbg}{RGB}{106,90,110}
+\colorlet{themeviolet-fg}{bleu303}
+
+\definecolor{themegrey-bg}{RGB}{160,142,147}
+\definecolor{themegrey-altbg}{RGB}{122,113,108}
+\colorlet{themegrey-fg}{jaune123}
+
+\definecolor{themered-bg}{RGB}{213,90,79}
+\definecolor{themered-altbg}{RGB}{135,70,55}
+\definecolor{themered-fg}{RGB}{0,80,111}
+
+\definecolor{themeblue-bg}{RGB}{0,123,147}
+\definecolor{themeblue-altbg}{RGB}{0,80,102}
+\definecolor{themeblue-fg}{RGB}{245,211,71}
+
+\definecolor{themepurple-bg}{RGB}{97,37,103}
+\definecolor{themepurple-altbg}{RGB}{42,23,40}
+\definecolor{themepurple-fg}{RGB}{245,211,71}
+
+\definecolor{themegreen-bg}{RGB}{126,143,100}
+\definecolor{themegreen-altbg}{RGB}{75,97,65}
+\definecolor{themegreen-fg}{RGB}{242,204,56}
+
+\definecolor{themeyellow-bg}{RGB}{219,187,46}
+\definecolor{themeyellow-altbg}{RGB}{151,125,0}
+\colorlet{themeyellow-fg}{bleu303}
+
+\definecolor{themeturquoise-bg}{RGB}{125,212,199}
+\definecolor{themeturquoise-altbg}{RGB}{82,170,154}
+\colorlet{themeturquoise-fg}{bleu303}
+
+%\definecolor{theme-bg}{RGB}{}
+%\definecolor{theme-altbg}{RGB}{}
+%\definecolor{theme-fg}{RGB}{}
 
 %=======================================================================
 % Definition du theme beamer
 %=======================================================================
-%---------- Couleurs propres au theme
-\colorlet{titlecolor}{white}
-\colorlet{boxtitle}{white}
-\colorlet{fgnormal}{black}
-\colorlet{bgnormal}{white}
-\colorlet{bglogo}{darkbleu303}
-\colorlet{bdyitemize}{black!80!white}
-\colorlet{sbdyitemize}{black}
-
 %---------- Parametres generaux
-\setbeamercovered{transparent=20}
+\setbeamercovered{transparent=40}
 
 \usefonttheme{professionalfonts}
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
+\setbeamertemplate{navigation symbols}{}
 
-\usecolortheme[named=bleu303]{structure}
+\setbeamersize{text margin left=3mm}
+\setbeamersize{text margin right=3mm}
 
-%---------- Barre laterale
-\setbeamertemplate{sidebar canvas left}[default]
-\addtobeamertemplate{sidebar left}{}{%
-    \raisebox{1mm}{%
-        \makebox[16mm]{%
-            \color{white}%
-            \usebeamerfont{page number in head/foot}%
-            \insertframenumber/\inserttotalframenumber%
-        }%
-    }%
+% \usecolortheme[named=bleu303]{structure}
+
+\setbeamertemplate{footline}{%
+  \hspace*{1mm}%
+  \raisebox{1mm}{%
+    \textbf{ÉCOLE POLYTECHNIQUE}-- \insertshorttitle%
+  }%
+  \hspace*{\fill}
+  \raisebox{1mm}{%
+    \insertframenumber%
+  }%
+  \hspace*{1mm}%
 }
-\setbeamercolor{sidebar left}{bg=bleu303}
-\setbeamercolor{title in sidebar}{fg=white}
-\setbeamercolor{author in sidebar}{fg=white}
-\setbeamercolor{subsection in sidebar}{bg=lightbleu303,fg=white}
-\setbeamercolor{section in sidebar}{bg=lightbleu303,fg=white}
+\setbeamertemplate{frametitle}{%
+  \sffamily\Large\color{bleu303}\insertframetitle\\
+  \sffamily\large\color{bleu303light}\insertframesubtitle%
+}
+\setbeamertemplate{frametitle continuation}{this is the next part of the title}
 
-%---------- Couleurs generales
-\setbeamercolor{title}{fg=titlecolor}
-\setbeamercolor{normal text}{fg=fgnormal,bg=bgnormal}               
-\setbeamercolor{alerted text}{fg=rouge485}                          
-\setbeamercolor{logo}{bg=bglogo}                                    
-\setbeamercolor{itemize/enumerate body}{fg=bdyitemize}              
-\setbeamercolor{itemize/enumerate subbody}{fg=sbdyitemize}          
-\setbeamertemplate{itemize item}[circle]                            
-\setbeamertemplate{itemize subitem}[triangle]                       
-\setbeamertemplate{enumerate item}[square]                          
-\setbeamertemplate{enumerate subitem}[circle]                       
-\setbeamertemplate{navigation symbols}{}                            
-\setbeamertemplate{blocks}[shadow=false]                            
-\setbeamercolor{block title}{bg=bleu303,fg=boxtitle}                
-\setbeamercolor{block body}{bg=ultralightbleu303,fg=black}          
-\setbeamercolor{block title alerted}{bg=rouge485,fg=boxtitle}       
-\setbeamercolor{block body alerted}{bg=ultralightrouge485,fg=black} 
-\setbeamercolor{block title example}{bg=vert575,fg=boxtitle}        
-\setbeamercolor{block body example}{bg=ultralightvert575,fg=black}  
+\newcommand\resetbackgroundcanvas{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(158,88){%
+        \makebox(0,0)[rt]{%
+          \color{gris428}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
+        }%
+      }%
+    \end{picture}%
+  }%
+}%
+
+\setbeamertemplate{block begin}{%
+  \begin{minipage}{\textwidth}\flushleft%
+    \color{marron871}\raisebox{-0.5ex}{\includegraphics[width=2em]{beamerxfiletcourt}}\\
+    \color{rouge485}\rmfamily\bfseries\large%
+    \insertblocktitle{}
+
+    \color{bleu303}\sffamily\mdseries\normalsize%
+}
+\setbeamertemplate{block end}{%
+  \end{minipage}\vspace*{1mm}
+}
+
+\setbeamercolor{alerted text}{fg=rouge485,bg=white}
+\setbeamercolor{item}{fg=bleu303,bg=white}
+\setbeamertemplate{itemize items}{-}
 
 %=======================================================================
 % Commandes de mise en page utilisateur
@@ -108,111 +255,295 @@
 \def\polysoustitresave{}
 \def\polyauteursave{}
 \def\polydatesave{\today}
-\def\polylogotitresave{}
-\def\polylogopersosave{}
 
 %---------- Mise en page
-\let\oldtitle=\title
-\renewcommandx\title[3][1={},3={}]{
+\newcommand{\MakeUppercaseWithNewline}[1]{%
+  \begingroup
+  \let\SavedOrgNewline\\%
+  \DeclareRobustCommand{\\}{\SavedOrgNewline}%
+  \MakeUppercase{#1}%
+  \endgroup
+}
+
+\let\oldtitle=\title%
+\renewcommandx\title[3][1={},3={}]{%
     % use: \title[sous-titre]{titre}[titre court]
     \renewcommand\polytitresave{#2}
     \renewcommand\polysoustitresave{#1}
-    \oldtitle[#3]{#2}
+    \ifthenelse{\equal{#3}{}}{%
+      \oldtitle{#2}%
+    }{%
+      \oldtitle[#3]{#2}%
+    }
     \subtitle{#1}
 }
 
-\let\oldauthor=\author
-\renewcommandx\author[2][1={}]{
+\let\oldauthor=\author%
+\renewcommandx\author[2][1={}]{%
     % use: \author[auteur court]{auteur}
     \renewcommand\polyauteursave{#2}
     \oldauthor{\rmfamily\bfseries #1}
 }
 
 % \let\olddate=\date
-\renewcommand\date[1]{
+\renewcommand\date[1]{%
     \renewcommand\polydatesave{#1}
 }
 
-\let\oldlogo=\logo
-\renewcommand\logo[1]{
-    \renewcommand\polylogopersosave{
-        \includegraphics[width=30mm,height=14mm,keepaspectratio]{#1}
+%=======================================================================
+% Diapos conforme charte graphique
+%=======================================================================
+%--- Maketitle
+\AtBeginDocument{%
+  \resetbackgroundcanvas%
+  \renewcommand\maketitle{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \setbeamertemplate{background canvas}{%
+      \color{white}%
+      \begin{picture}(160,90)%
+        \put(80,45){%
+          \makebox(0,0)[c]{%
+            \includegraphics[width=\paperwidth,keepaspectratio]{beamerxbackground}%
+          }%
+        }%
+        \put(15,45){%
+          \makebox(0,0)[c]{%
+            \color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}%
+          }%
+        }%
+        \put(1,1){%
+          \makebox(0,0)[lb]{%
+            \begin{minipage}{0.5\paperwidth}\noindent%
+              \sffamily\footnotesize\polyauteursave%
+            \end{minipage}%
+          }%
+        }%
+        \put(159,1){%
+          \makebox(0,0)[rb]{%
+            \begin{minipage}{0.5\paperwidth}\noindent\flushright%
+              \sffamily\footnotesize\polydatesave%
+            \end{minipage}%
+          }%
+        }%
+        \put(159,46){%
+          \makebox(0,0)[rb]{%
+            \begin{minipage}{0.75\paperwidth}\noindent\flushright%
+              \Large\setlength{\baselineskip}{0.7\baselineskip}%
+              \sffamily\bfseries\MakeUppercaseWithNewline{\polytitresave}%
+            \end{minipage}%
+          }%
+        }%
+        \put(159,47){%
+          \makebox(0,0)[rt]{%
+            \begin{minipage}{0.75\paperwidth}\noindent\flushright%
+              \setlength{\baselineskip}{0.7\baselineskip}%
+              \sffamily\polysoustitresave%
+            \end{minipage}%
+          }%
+        }%
+      \end{picture}%
     }
+    \begin{frame}[plain,c]
+    \end{frame}
+    \resetbackgroundcanvas{}
+  }
 }
 
-\oldlogo{%
-    \hspace*{\paperwidth}%
-    \hspace*{-16mm}%
-    \makebox[\paperwidth]{%
-        \makebox[16mm]{%
-            \includegraphics[height=14mm]{beamerxwhitelogo}%
-        }%
-        \hfill%
-        \makebox[32mm][r]{%
-            \polylogopersosave{}%
-        }%
-        \hspace*{1mm}%
-    }%
+%--- XSection
+% Prototype :
+% \xsection{color_choice}
+%          [short_title]
+%          {title}
+%          [picture]
+\def\xsection{\@ifstar\@@xsection\@xsection}
+\newcommandx{\@xsection}[4][{2={},4=welcome}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \section{#3}%
+  }{%
+    \section[#2]{#3}%
+  }%
+  \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{\arabic{section}}{#3}%
+}
+\newcommandx{\@@xsection}[4][{2={},4=welcome}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \section*{#3}%
+  }{%
+    \section*[#2]{#3}%
+  }%
+  \addtocounter{section}{-1}
+  \xsectionframe{theme#1-bg}{theme#1-fg}{#4}{}{#3}%
 }
 
-%---------- Maketitle
-\AtBeginDocument{
-    \renewcommand\maketitle{
-        \ifdefined\shorthandoff
-            \shorthandoff{;!?:}
-        \fi
-        {
-            \setlength{\unitlength}{0.1\paperheight}
-            \setbeamertemplate{background canvas}{%
-                \color{white}%
-                \begin{picture}(10,10)% fond
-                    \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}
-                \end{picture}%
-                \hspace*{-\paperheight}
-                \begin{minipage}[b]{\paperwidth}\sffamily
-                    \footnotesize \hspace*{0mm}\raisebox{1mm}{\polyauteursave}\hspace*{\fill}\raisebox{1mm}{\polydatesave{}}\hspace*{3mm}
-                \end{minipage}
-                \hspace*{-\paperwidth}
-                \tikz\node[remember picture, overlay, right] at (current page.west) {\includegraphics[height=0.33\paperheight]{beamerxwhitelogo}};
-            }%
-            \begin{frame}[plain,c]
-                \color{white}
-                \begin{flushright}\sffamily
-                    \begin{picture}(9,6)
-                        \put(0,2.95){% titre
-                            \makebox(9,3.05)[br]{%
-                                $\text{%
-                                    \bfseries%
-                                    \begin{minipage}{9\unitlength}%
-                                        \Large%
-                                        \setlength{\baselineskip}{0.7\baselineskip}%
-                                        \begin{flushright}%
-                                            \polytitresave%
-                                        \end{flushright}%
-                                    \end{minipage}%
-                                }$%
-                            }%
-                        }
-                        \put(0,0){% sous-titre
-                            \makebox(9,2.75)[tr]{%
-                                $\text{%
-                                    \begin{minipage}{9\unitlength}%
-                                        \setlength{\baselineskip}{0.7\baselineskip}%
-                                        \begin{flushright}%
-                                            \polysoustitresave%
-                                        \end{flushright}%
-                                    \end{minipage}%
-                                }$%
-                            }%
-                        }
-                    \end{picture}
-                \end{flushright}
-            \end{frame}
-        }
-        \ifdefined\shorthandon
-            \shorthandon{;!?:}
-        \fi
-    }
-    \setbeamertemplate{background canvas}{}
+%- XSectionFrame
+% Prototype :
+% \xsectionframe{bg_color}
+%               {fg_color}
+%               {picture}
+%               {number}
+%               {title}
+\newcommand{\xsectionframe}[5]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(80,0){%
+        \makebox(0,0)[cb]{%
+          \includegraphics[width=\paperwidth,keepaspectratio]{#3}%
+        }%
+      }%
+      \put(0,60){%
+        \color{#1}\rule{\paperwidth}{\paperheight/3}%
+      }%
+      \ifthenelse{\equal{#4}{}}{%
+        \put(80,75){%
+          \makebox(0,0)[c]{%
+            \begin{minipage}{140\unitlength}\centering%
+              \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
+        }%
+      }{%
+        \put(80,75){%
+          \makebox(0,0)[cb]{%
+            \begin{minipage}{140\unitlength}\centering%
+              \Huge\sffamily\color{#2}#4%
+            \end{minipage}%
+          }%
+        }%
+        \put(80,70){%
+          \makebox(0,0)[ct]{%
+            \begin{minipage}{140\unitlength}\centering%
+              \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
+        }%
+      }%
+    \end{picture}%
+  }
+  \begin{frame}[plain,c]
+  \end{frame}
+  \resetbackgroundcanvas{}
 }
+
+%--- XSubSection
+% Prototype :
+% \xsubsection{color_choice}
+%             [short_title]
+%             {title}
+%             {subtitle}
+%             [picture]
+\def\xsubsection{\@ifstar\@@xsubsection\@xsubsection}
+\newcommandx{\@xsubsection}[5][{2={},5=pei}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \subsection{#3}%
+  }{%
+    \subsection[#2]{#3}%
+  }%
+  \xsubsectionframe{theme#1-bg}{theme#1-altbg}{theme#1-fg}{#5}{#3}{#4}%
+}
+\newcommandx{\@@xsubsection}[5][{2={},5=pei}]{%
+  \ifthenelse{\equal{#2}{}}{%
+    \subsection*{#3}%
+  }{%
+    \subsection*[#2]{#3}%
+  }%
+  \addtocounter{subsection}{-1}%
+  \xsubsectionframe{theme#1-bg}{theme#1-altbg}{theme#1-fg}{#5}{#3}{#4}%
+}
+
+%- XSubSectionFrame
+% Prototype :
+% \xsubsectionframe{bg_color}
+%                  {bg_altcolor}
+%                  {fg_color}
+%                  {picture}
+%                  {title}
+%                  {subtitle}
+\newcommand{\xsubsectionframe}[6]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(80,90){%
+        \makebox(0,0)[ct]{%
+          \includegraphics[width=\paperwidth,keepaspectratio]{#4}%
+        }%
+      }%
+      \put(0,0){%
+        \color{#1}\rule{\paperwidth}{0.5\paperheight}%
+      }%
+      \put(160,22.5){%
+        \makebox(0,0)[c]{%
+          \color{#2}\includegraphics[height=3\paperheight/7,keepaspectratio]{beamerxarmes}%
+        }%
+      }%
+      \ifthenelse{\equal{#6}{}}{%
+        \put(80,21){%
+          \makebox(0,0)[ct]{%
+            \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
+          }%
+        }%
+        \put(80,24){%
+          \makebox(0,0)[cb]{%
+            \begin{minipage}{120\unitlength}\centering%
+              \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
+        }%
+      }{%
+        \put(80,22.5){%
+          \makebox(0,0)[c]{%
+            \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
+          }%
+        }%
+        \put(80,28){%
+          \makebox(0,0)[cb]{%
+            \begin{minipage}{120\unitlength}\centering%
+              \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
+            \end{minipage}%
+          }%
+        }%
+        \put(80,18){%
+          \makebox(0,0)[ct]{%
+            \begin{minipage}{120\unitlength}\centering%
+              \large\rmfamily\color{#3}#6%
+            \end{minipage}%
+          }%
+        }%
+      }%
+    \end{picture}%
+  }
+  \begin{frame}[plain,c]
+  \end{frame}
+  \resetbackgroundcanvas{}
+}
+
+%--- XPic
+% Prototype:
+% \begin{xpic}
+%       [size adjustment]
+%       {picture}
+\newenvironment{xpic}[2][hw]{%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(80,45){%
+        \makebox(0,0)[c]{%
+          \ifthenelse{\equal{#1}{w}}{%
+            \includegraphics[width=\paperwidth]{#2}%
+          }{\ifthenelse{\equal{#1}{h}}{%
+            \includegraphics[height=\paperheight]{#2}%
+          }{%
+            \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#2}%
+          }}%
+        }%
+      }%
+    \end{picture}
+  }%
+  \begin{frame}[plain,b]\centering%
+}{%
+    \vspace*{5mm}
+  \end{frame}%
+}
+
+
+
 \endinput

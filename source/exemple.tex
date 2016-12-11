@@ -1,0 +1,131 @@
+% vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb,noconfigs]{babel}
+
+\usepackage{beamerx}
+\usepackage{lipsum}
+
+\title[Stage de seconde année à l'École polytechnique]
+      {Connecting things with Wizzilab}
+\author{Clément Durand}
+
+\begin{document}
+\maketitle
+
+\xsection{violet}{Titre de ma section}
+
+\xsubsection{violet}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\begin{frame}{Control frame}{Checking everything works}
+  \lipsum[1]
+\end{frame}
+
+\xsection{grey}{Titre}[pei]
+
+\xsubsection{grey}{Titre}{Sous-titre}[welcome]
+
+\begin{xpic}{welcome-short}
+  some text xpic (hw)
+\end{xpic}
+
+\xsection{red}{Titre de ma section}
+
+\xsubsection{red}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\begin{xpic}[h]{welcome-short}
+  some text xpic (h)
+\end{xpic}
+
+\xsection{blue}{Titre de ma section}
+
+\xsubsection{blue}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\begin{xpic}[w]{welcome-short}
+  some text xpic (w)
+\end{xpic}
+
+\xsection*{purple}{Titre de ma section}
+
+\xsubsection*{purple}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\begin{frame}{Testing blocks}{Stacked blocks}
+  \begin{block}{First element}
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus eros, venenatis congue ipsum id, tempor feugiat quam. Suspendisse in congue elit, in mattis orci.
+  \end{block}
+
+  \begin{block}{Second element}
+    Donec lorem lorem, faucibus a mauris et, eleifend tincidunt eros. Morbi ante metus, ullamcorper quis elit sit amet, pellentesque elementum ipsum.
+  \end{block}
+
+  \begin{block}{Third element}
+    Suspendisse potenti. Morbi eget lorem in massa malesuada venenatis. Morbi porta feugiat leo, in interdum dolor dapibus vel.
+  \end{block}
+\end{frame}
+
+\xsection{green}{Titre de ma section}
+
+\xsubsection{green}{Titre de ma sous-section}{}
+
+\begin{frame}{Testing blocks}{Adjacent blocks}
+  \begin{columns}[t]
+    \begin{column}{0.4\textwidth}
+      \begin{block}{First element}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus eros, venenatis congue ipsum id, tempor feugiat quam. Suspendisse in congue elit, in mattis orci.
+      \end{block}
+    \end{column}
+
+    \begin{column}{0.3\textwidth}
+      \begin{block}{Second element}
+        Donec lorem lorem, faucibus a mauris et, eleifend tincidunt eros. Morbi ante metus, ullamcorper quis elit sit amet, pellentesque elementum ipsum.
+      \end{block}
+    \end{column}
+
+    \begin{column}{0.3\textwidth}
+      \begin{block}{Third element}
+        Suspendisse potenti. Morbi eget lorem in massa malesuada venenatis. Morbi porta feugiat leo, in interdum dolor dapibus vel.
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\xsection{yellow}{Titre de ma section}
+
+\xsubsection{yellow}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\begin{frame}
+
+  \begin{itemize}
+    \item a
+    \item b
+      \begin{itemize}
+        \item ba
+        \item bb
+          \begin{itemize}
+            \item bba
+            \item bbb
+          \end{itemize}
+      \end{itemize}
+    \item c
+  \end{itemize}
+
+  \begin{enumerate}
+    \item a
+    \item b
+      \begin{enumerate}
+        \item ba
+        \item bb
+          \begin{enumerate}
+            \item bba
+            \item bbb
+          \end{enumerate}
+      \end{enumerate}
+    \item c
+  \end{enumerate}
+\end{frame}
+
+\xsection{turquoise}{Titre de ma section}
+
+\xsubsection{turquoise}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\end{document}
