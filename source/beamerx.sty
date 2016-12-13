@@ -8,6 +8,8 @@
 \DeclareOption{simplefoot}{\@simplefoottrue}
 \newif\if@simplehead\@simpleheadfalse
 \DeclareOption{simplehead}{\@simpleheadtrue}
+\newif\if@simplebloc\@simpleblocfalse
+\DeclareOption{simplebloc}{\@simplebloctrue}
 \ProcessOptions*
 %=======================================================================
 % Package requis
@@ -244,7 +246,10 @@
 
 \setbeamertemplate{block begin}{%
   \begin{minipage}{\textwidth}\flushleft%
+    \if@simplebloc%
+    \else%
     \color{marron871}\raisebox{-0.5ex}{\includegraphics[width=2em]{beamerxfiletcourt}}\\
+    \fi%
     \color{rouge485}\rmfamily\bfseries\large%
     \insertblocktitle{}
 
