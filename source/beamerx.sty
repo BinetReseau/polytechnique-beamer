@@ -4,6 +4,8 @@
 %=======================================================================
 % Declaration des options
 %=======================================================================
+\newif\if@simplefoot\@simplefootfalse
+\DeclareOption{simplefoot}{\@simplefoottrue}
 \ProcessOptions*
 %=======================================================================
 % Package requis
@@ -207,7 +209,10 @@
   \hspace*{\beamerxmargin}%
   \raisebox{\beamerxmargin}{%
     \textbf{ÉCOLE POLYTECHNIQUE} %
+    \if@simplefoot%
+    \else%
     -- \insertshorttitle%
+    \fi%
   }%
   \hspace*{\fill}
   \raisebox{\beamerxmargin}{%
