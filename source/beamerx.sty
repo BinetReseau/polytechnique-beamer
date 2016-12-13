@@ -6,6 +6,8 @@
 %=======================================================================
 \newif\if@simplefoot\@simplefootfalse
 \DeclareOption{simplefoot}{\@simplefoottrue}
+\newif\if@simplehead\@simpleheadfalse
+\DeclareOption{simplehead}{\@simpleheadtrue}
 \ProcessOptions*
 %=======================================================================
 % Package requis
@@ -226,6 +228,8 @@
 
 \newcommand\resetbackgroundcanvas{%
   \setbeamertemplate{background canvas}{%
+    \if@simplehead%
+    \else%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
       \put(154,84){%
@@ -234,6 +238,7 @@
         }%
       }%
     \end{picture}%
+    \fi%
   }%
 }%
 
