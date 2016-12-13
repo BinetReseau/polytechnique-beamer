@@ -190,39 +190,40 @@
 % Definition du theme beamer
 %=======================================================================
 %---------- Parametres generaux
+\newlength\beamerxmargin
+\setlength\beamerxmargin{\textheight/15} % 6 units
 \setbeamercovered{transparent=40}
 
 \usefonttheme{professionalfonts}
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
 \setbeamertemplate{navigation symbols}{}
 
-\setbeamersize{text margin left=3mm}
-\setbeamersize{text margin right=3mm}
+\setbeamersize{text margin left=\beamerxmargin}
+\setbeamersize{text margin right=\beamerxmargin}
 
 % \usecolortheme[named=bleu303]{structure}
 
 \setbeamertemplate{footline}{%
-  \hspace*{1mm}%
-  \raisebox{1mm}{%
-    \textbf{ÉCOLE POLYTECHNIQUE}-- \insertshorttitle%
+  \hspace*{\beamerxmargin}%
+  \raisebox{\beamerxmargin}{%
+    \textbf{ÉCOLE POLYTECHNIQUE} %
+    -- \insertshorttitle%
   }%
   \hspace*{\fill}
-  \raisebox{1mm}{%
+  \raisebox{\beamerxmargin}{%
     \insertframenumber%
   }%
-  \hspace*{1mm}%
+  \hspace*{\beamerxmargin}%
 }
 \setbeamertemplate{frametitle}{%
-  \sffamily\Large\color{bleu303}\insertframetitle\\
-  \sffamily\large\color{bleu303light}\insertframesubtitle%
+  \raisebox{-\beamerxmargin}{\sffamily\Large\color{bleu303}\MakeUppercase{\insertframetitle}}
 }
-\setbeamertemplate{frametitle continuation}{this is the next part of the title}
 
 \newcommand\resetbackgroundcanvas{%
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
-      \put(158,88){%
+      \put(154,84){%
         \makebox(0,0)[rt]{%
           \color{gris428}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%
