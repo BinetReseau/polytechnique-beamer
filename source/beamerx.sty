@@ -207,7 +207,15 @@
 % Definition du theme beamer
 %=======================================================================
 %---------- Parametres generaux
-\colorlet{maincolor}{black}
+\newcommand\resetcolors{%
+  \colorlet{xmaincolor}{black}%
+  \colorlet{xemphcolor}{bleu303}%
+  \colorlet{xalrtcolor}{rouge485}%
+  \colorlet{xfootcolor}{xmaincolor}%
+  \colorlet{xheadcolor}{xemphcolor}%
+}
+\resetcolors%
+
 \newlength\beamerxmargin%
 \setlength\beamerxmargin{\textheight/15} % 6 units
 \setbeamercovered{transparent=40}
@@ -222,7 +230,7 @@
 \newcommand{\beamerxshorttitle}{-- \insertshorttitle}
 \newcommand\resetfootline{%
   \setbeamertemplate{footline}{%
-    \color{maincolor}%
+    \color{xfootcolor}%
     \hspace*{\beamerxmargin}%
     \raisebox{\beamerxmargin}{%
       \textbf{ÉCOLE POLYTECHNIQUE} %
@@ -238,7 +246,7 @@
 
 \newcommand\resetframetitle{%
   \setbeamertemplate{frametitle}{%
-    \raisebox{-\beamerxmargin}{\sffamily\Large\color{bleu303}\MakeUppercase{\insertframetitle}}
+    \raisebox{-\beamerxmargin}{\sffamily\Large\color{xheadcolor}\MakeUppercase{\insertframetitle}}
   }
 }
 
@@ -273,6 +281,7 @@
 }
 
 \newcommand\beamerxresettemplates{%
+  \resetcolors%
   \resetfootline%
   \resetframetitle%
   \resetbackgroundcanvas%
@@ -280,8 +289,9 @@
 }
 \AtBeginDocument{\beamerxresettemplates{}}
 
-\setbeamercolor{alerted text}{fg=rouge485,bg=white}
-\setbeamercolor{item}{fg=bleu303,bg=white}
+\setbeamercolor{alerted text}{fg=xalrtcolor}
+\setbeamercolor{item}{fg=xemphcolor}
+\setbeamercolor{normal text}{fg=xmaincolor}
 \setbeamertemplate{itemize items}{-}
 
 %=======================================================================
