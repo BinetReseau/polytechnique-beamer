@@ -4,12 +4,23 @@
 %=======================================================================
 % Declaration des options
 %=======================================================================
-\newif\if@simplefoot\@simplefootfalse
-\DeclareOption{simplefoot}{\@simplefoottrue}
-\newif\if@simplehead\@simpleheadfalse
-\DeclareOption{simplehead}{\@simpleheadtrue}
-\newif\if@simplebloc\@simpleblocfalse
-\DeclareOption{simplebloc}{\@simplebloctrue}
+\DeclareOption{simplefoot}{%
+  \AtEndOfPackage{%
+    \renewcommand{\beamerxshorttitle}{}%
+  }
+}
+\DeclareOption{simplehead}{%
+  \AtEndOfPackage{%
+    \renewcommand{\resetbackgroundcanvas}{%
+      \setbeamertemplate{background canvas}{}
+    }
+  }
+}
+\DeclareOption{simplebloc}{%
+  \AtEndOfPackage{%
+    \renewcommand{\beamerxblockheader}{}
+  }
+}
 \ProcessOptions*
 %=======================================================================
 % Package requis
@@ -196,7 +207,8 @@
 % Definition du theme beamer
 %=======================================================================
 %---------- Parametres generaux
-\newlength\beamerxmargin
+\colorlet{maincolor}{black}
+\newlength\beamerxmargin%
 \setlength\beamerxmargin{\textheight/15} % 6 units
 \setbeamercovered{transparent=40}
 
@@ -207,31 +219,31 @@
 \setbeamersize{text margin left=\beamerxmargin}
 \setbeamersize{text margin right=\beamerxmargin}
 
-% \usecolortheme[named=bleu303]{structure}
-
-\setbeamertemplate{footline}{%
-  \hspace*{\beamerxmargin}%
-  \raisebox{\beamerxmargin}{%
-    \textbf{ÉCOLE POLYTECHNIQUE} %
-    \if@simplefoot%
-    \else%
-    -- \insertshorttitle%
-    \fi%
-  }%
-  \hspace*{\fill}
-  \raisebox{\beamerxmargin}{%
-    \insertframenumber%
-  }%
-  \hspace*{\beamerxmargin}%
+\newcommand{\beamerxshorttitle}{-- \insertshorttitle}
+\newcommand\resetfootline{%
+  \setbeamertemplate{footline}{%
+    \color{maincolor}%
+    \hspace*{\beamerxmargin}%
+    \raisebox{\beamerxmargin}{%
+      \textbf{ÉCOLE POLYTECHNIQUE} %
+      \beamerxshorttitle%
+    }%
+    \hspace*{\fill}
+    \raisebox{\beamerxmargin}{%
+      \insertframenumber%
+    }%
+    \hspace*{\beamerxmargin}%
+  }
 }
-\setbeamertemplate{frametitle}{%
-  \raisebox{-\beamerxmargin}{\sffamily\Large\color{bleu303}\MakeUppercase{\insertframetitle}}
+
+\newcommand\resetframetitle{%
+  \setbeamertemplate{frametitle}{%
+    \raisebox{-\beamerxmargin}{\sffamily\Large\color{bleu303}\MakeUppercase{\insertframetitle}}
+  }
 }
 
 \newcommand\resetbackgroundcanvas{%
   \setbeamertemplate{background canvas}{%
-    \if@simplehead%
-    \else%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
       \put(154,84){%
@@ -240,24 +252,33 @@
         }%
       }%
     \end{picture}%
-    \fi%
   }%
 }%
 
-\setbeamertemplate{block begin}{%
-  \begin{minipage}{\textwidth}\flushleft%
-    \if@simplebloc%
-    \else%
+\newcommand{\beamerxblockheader}{%
     \color{marron871}\raisebox{-0.5ex}{\includegraphics[width=2em]{beamerxfiletcourt}}\\
-    \fi%
-    \color{rouge485}\rmfamily\bfseries\large%
-    \insertblocktitle{}
+}
+\newcommand\resetblock{%
+  \setbeamertemplate{block begin}{%
+    \begin{minipage}{\textwidth}\flushleft%
+      \beamerxblockheader%
+      \color{rouge485}\rmfamily\bfseries\large%
+      \insertblocktitle{}
 
-    \color{bleu303}\sffamily\mdseries\normalsize%
+      \color{bleu303}\sffamily\mdseries\normalsize%
+  }
+  \setbeamertemplate{block end}{%
+    \end{minipage}\vspace*{1mm}
+  }
 }
-\setbeamertemplate{block end}{%
-  \end{minipage}\vspace*{1mm}
+
+\newcommand\beamerxresettemplates{%
+  \resetfootline%
+  \resetframetitle%
+  \resetbackgroundcanvas%
+  \resetblock%
 }
+\AtBeginDocument{\beamerxresettemplates{}}
 
 \setbeamercolor{alerted text}{fg=rouge485,bg=white}
 \setbeamercolor{item}{fg=bleu303,bg=white}
@@ -311,7 +332,6 @@
 %=======================================================================
 %--- Maketitle
 \AtBeginDocument{%
-  \resetbackgroundcanvas%
   \renewcommand\maketitle{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \setbeamertemplate{background canvas}{%
