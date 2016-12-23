@@ -31,6 +31,8 @@
 \RequirePackage{geometry}
 \RequirePackage{xcolor}
 \RequirePackage{xargs}
+\RequirePackage{transparent}
+\RequirePackage{adjustbox}
 
 %=======================================================================
 % Definition des couleurs
@@ -208,10 +210,12 @@
 %=======================================================================
 %---------- Parametres generaux
 \newcommand\resetcolors{%
-  \colorlet{xmaincolor}{black}%
+  \colorlet{xfgcolor}{black}%
+  \colorlet{xbgcolor}{white}%
+  \colorlet{xtextcolor}{black}%
   \colorlet{xemphcolor}{bleu303}%
   \colorlet{xalrtcolor}{rouge485}%
-  \colorlet{xfootcolor}{xmaincolor}%
+  \colorlet{xfootcolor}{xtextcolor}%
   \colorlet{xheadcolor}{xemphcolor}%
 }
 \resetcolors%
@@ -219,6 +223,7 @@
 \newlength\beamerxmargin%
 \setlength\beamerxmargin{\textheight/15} % 6 units
 \setbeamercovered{transparent=40}
+\setlength\fboxsep{1ex}
 
 \usefonttheme{professionalfonts}
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
@@ -291,7 +296,7 @@
 
 \setbeamercolor{alerted text}{fg=xalrtcolor}
 \setbeamercolor{item}{fg=xemphcolor}
-\setbeamercolor{normal text}{fg=xmaincolor}
+\setbeamercolor{normal text}{fg=xfgcolor}
 \setbeamertemplate{itemize items}{-}
 
 %=======================================================================
@@ -590,6 +595,89 @@
   \end{frame}%
 }
 
+%--- Picframe
+% Prototype:
+% \begin{picframe}
+%       [dark/light]
+%       {picture}
+%       [frame parameters]
+%       {title}
+\newsavebox\beamerxpicturebox%
+\newcommand\includefullpic[1]{%
+  \sbox\beamerxpicturebox{\includegraphics{#1}}%
+  \ifdim\ht\beamerxpicturebox<.5625\wd\beamerxpicturebox%
+    \includegraphics[height=\paperheight]{#1}%
+  \else%
+    \includegraphics[width=\paperwidth]{#1}%
+  \fi%
+}
+\newenvironmentx{picframe}[4][1=darkbw,3=c]{%
+  \ifthenelse{\equal{#1}{darkbw}}{%dark b&w
+    \colorlet{xfgcolor}{black}%
+    \colorlet{xtextcolor}{white}%
+    \colorlet{xbgcolor}{white}%
+    \colorlet{xemphcolor}{black}%
+    \colorlet{xalrtcolor}{rouge485dark}%
+  }{\ifthenelse{\equal{#1}{dark}}{%dark
+    \colorlet{xfgcolor}{black}%
+    \colorlet{xtextcolor}{white}%
+    \colorlet{xbgcolor}{white}%
+    \colorlet{xemphcolor}{bleu303dark}%
+    \colorlet{xalrtcolor}{rouge485dark}%
+  }{\ifthenelse{\equal{#1}{lightbw}}{%light b&w
+    \colorlet{xfgcolor}{white}%
+    \colorlet{xtextcolor}{black}%
+    \colorlet{xbgcolor}{black}%
+    \colorlet{xemphcolor}{white}%
+    \colorlet{xalrtcolor}{rouge485}%
+  }{%light
+    \colorlet{xfgcolor}{white}%
+    \colorlet{xtextcolor}{black}%
+    \colorlet{xbgcolor}{bleu303dark}%
+    \colorlet{xemphcolor}{white}%
+    \colorlet{xalrtcolor}{rouge485}%
+  }}}%
+  \colorlet{xfootcolor}{xtextcolor}%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(80,45){%
+        \makebox(0,0)[c]{%
+          \includefullpic{#2}%
+        }%
+      }%
+    \end{picture}%
+  }
+  \setbeamertemplate{frametitle}{%
+    \raisebox{-\beamerxmargin}{%
+      \hspace*{-\beamerxmargin}%
+      \colorbox{xbgcolor}{%
+        \hspace*{\dimexpr\beamerxmargin-\fboxsep}%
+        \sffamily\Large\color{xemphcolor}%
+        \MakeUppercase{\insertframetitle}%
+      }%
+    }%
+  }
+  \setbeamertemplate{block begin}{%
+    \transparent{0.3}
+    \begin{adjustbox}{minipage={\textwidth-2\fboxsep},margin=\fboxsep,bgcolor=xbgcolor}\color{xemphcolor}
+      \transparent{1}
+      \color{xalrtcolor}\rmfamily\bfseries\large%
+      \insertblocktitle{}
 
+      \color{xfgcolor}\sffamily\mdseries\normalsize%
+  }
+  \setbeamertemplate{block end}{%
+    \end{adjustbox}
+    \transparent{1}
+  }
+  \begin{frame}[#3]{#4}
+}{%
+  \end{frame}
+  \resetbackgroundcanvas%
+  \resetcolors%
+  \resetframetitle%
+  \resetblock%
+}
 
 \endinput
