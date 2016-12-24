@@ -2,6 +2,11 @@
 
 ## 2.0
 
+### 2.0.2-beta
+
+* Solved compatibility issues with many viewers and xelatex, lualatex by using
+pgf instead of transparent
+
 ### 2.0.1-beta
 
 * Made a few changes in layout (margins, color choices, etc.).
