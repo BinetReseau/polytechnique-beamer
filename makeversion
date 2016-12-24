@@ -8,7 +8,7 @@ checkversion () {
 }
 
 dissectversion () {
-  echo "$1" | sed -r 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)(-?(beta))?(-([0-9]+)-g([a-fA-F0-9]+)-(dirty))?$/\1:\2:\3:\5:\7:\8:\9:/'
+  echo "$1" | sed -r 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)(-?(beta))?(-([0-9]+)-g([a-fA-F0-9]+)(-dirty)?)?$/\1:\2:\3:\5:\7:\8:\9:/'
 }
 
 get () {
@@ -132,6 +132,13 @@ else
 fi;
 makechangelog;
 
-git add CHANGELOG.md &&
-git commit -S -m "releasing $newv" &&
+git add CHANGELOG.md && {
+  nparents=$(git cat-file -p HEAD | sed -n '/^parent/ p' | wc -l)
+  if [ $nparents -gt 1 ]; then
+    flags=--amend;
+  else
+    flags=;
+  fi;
+} &&
+git commit $flags -S -m "releasing $newv" &&
 git tag "$newv" -s -F release/changelog
