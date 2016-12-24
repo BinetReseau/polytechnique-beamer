@@ -10,7 +10,7 @@
 
 ### 2.0.0-beta
 
-Changed the whole layout, based on models from the Direction of Communication at
+* Changed the whole layout, based on models from the Direction of Communication at
 the École polytechnique.
 
 # 1
@@ -19,4 +19,4 @@ the École polytechnique.
 
 ### 1.0.0
 
-Basic beamer package, based on the `Berkeley` theme.
+* Basic beamer package, based on the `Berkeley` theme.

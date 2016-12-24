@@ -45,15 +45,15 @@ compareversions () {
 
 makechangelog () {
   echo -e "\n# Enter here the informations about changes in your program in version %s." "$newv" > release/changelog
-  tag=${oldv%%-*};
+  tag=$(git describe --tags --abbrev=0);
   git log --oneline "$tag"..HEAD | sed 's/^/# /' >> release/changelog
   vim -c 'set ft=gitcommit | set tw=80 | set cc=+1 | startinsert' release/changelog
-  wc=$(sed '/^#/ d' release/changelog | wc -w)
+  wc=$(sed '1d; 2d; /^#/ d' release/changelog | wc -w)
   if [ $wc -gt 0 ]; then
     {
       cat release/changelog_before
       cat release/changelog_template
-      sed '/^#/ d' release/changelog
+      sed '1d; 2d; /^#/ d' release/changelog
       echo ""
       cat release/changelog_after
     } | uniq > CHANGELOG.md
