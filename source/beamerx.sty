@@ -31,8 +31,8 @@
 \RequirePackage{geometry}
 \RequirePackage{xcolor}
 \RequirePackage{xargs}
-\RequirePackage{transparent}
 \RequirePackage{adjustbox}
+\RequirePackage{pgf}
 
 %=======================================================================
 % Definition des couleurs
@@ -659,9 +659,9 @@
     }%
   }
   \setbeamertemplate{block begin}{%
-    \transparent{0.3}
+    \pgfsetfillopacity{0.3}
     \begin{adjustbox}{minipage={\textwidth-2\fboxsep},margin=\fboxsep,bgcolor=xbgcolor}\color{xemphcolor}
-      \transparent{1}
+      \pgfsetfillopacity{1}
       \color{xalrtcolor}\rmfamily\bfseries\large%
       \insertblocktitle{}
 
@@ -669,7 +669,7 @@
   }
   \setbeamertemplate{block end}{%
     \end{adjustbox}
-    \transparent{1}
+    \pgfsetfillopacity{1}
   }
   \begin{frame}[#3]{#4}
 }{%
