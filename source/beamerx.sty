@@ -4,6 +4,23 @@
 %=======================================================================
 % Declaration des options
 %=======================================================================
+\DeclareOption{simplefoot}{%
+  \AtEndOfPackage{%
+    \renewcommand{\beamerxshorttitle}{}%
+  }
+}
+\DeclareOption{simplehead}{%
+  \AtEndOfPackage{%
+    \renewcommand{\resetbackgroundcanvas}{%
+      \setbeamertemplate{background canvas}{}
+    }
+  }
+}
+\DeclareOption{simplebloc}{%
+  \AtEndOfPackage{%
+    \renewcommand{\beamerxblockheader}{}
+  }
+}
 \ProcessOptions*
 %=======================================================================
 % Package requis
@@ -14,6 +31,8 @@
 \RequirePackage{geometry}
 \RequirePackage{xcolor}
 \RequirePackage{xargs}
+\RequirePackage{transparent}
+\RequirePackage{adjustbox}
 
 %=======================================================================
 % Definition des couleurs
@@ -190,39 +209,57 @@
 % Definition du theme beamer
 %=======================================================================
 %---------- Parametres generaux
+\newcommand\resetcolors{%
+  \colorlet{xfgcolor}{black}%
+  \colorlet{xbgcolor}{white}%
+  \colorlet{xtextcolor}{black}%
+  \colorlet{xemphcolor}{bleu303}%
+  \colorlet{xalrtcolor}{rouge485}%
+  \colorlet{xfootcolor}{xtextcolor}%
+  \colorlet{xheadcolor}{xemphcolor}%
+}
+\resetcolors%
+
+\newlength\beamerxmargin%
+\setlength\beamerxmargin{\textheight/15} % 6 units
 \setbeamercovered{transparent=40}
+\setlength\fboxsep{1ex}
 
 \usefonttheme{professionalfonts}
 \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
 \setbeamertemplate{navigation symbols}{}
 
-\setbeamersize{text margin left=3mm}
-\setbeamersize{text margin right=3mm}
+\setbeamersize{text margin left=\beamerxmargin}
+\setbeamersize{text margin right=\beamerxmargin}
 
-% \usecolortheme[named=bleu303]{structure}
+\newcommand{\beamerxshorttitle}{-- \insertshorttitle}
+\newcommand\resetfootline{%
+  \setbeamertemplate{footline}{%
+    \color{xfootcolor}%
+    \hspace*{\beamerxmargin}%
+    \raisebox{\beamerxmargin}{%
+      \textbf{ÉCOLE POLYTECHNIQUE} %
+      \beamerxshorttitle%
+    }%
+    \hspace*{\fill}
+    \raisebox{\beamerxmargin}{%
+      \insertframenumber%
+    }%
+    \hspace*{\beamerxmargin}%
+  }
+}
 
-\setbeamertemplate{footline}{%
-  \hspace*{1mm}%
-  \raisebox{1mm}{%
-    \textbf{ÉCOLE POLYTECHNIQUE}-- \insertshorttitle%
-  }%
-  \hspace*{\fill}
-  \raisebox{1mm}{%
-    \insertframenumber%
-  }%
-  \hspace*{1mm}%
+\newcommand\resetframetitle{%
+  \setbeamertemplate{frametitle}{%
+    \raisebox{-\beamerxmargin}{\sffamily\Large\color{xheadcolor}\MakeUppercase{\insertframetitle}}
+  }
 }
-\setbeamertemplate{frametitle}{%
-  \sffamily\Large\color{bleu303}\insertframetitle\\
-  \sffamily\large\color{bleu303light}\insertframesubtitle%
-}
-\setbeamertemplate{frametitle continuation}{this is the next part of the title}
 
 \newcommand\resetbackgroundcanvas{%
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
-      \put(158,88){%
+      \put(154,84){%
         \makebox(0,0)[rt]{%
           \color{gris428}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%
@@ -231,20 +268,35 @@
   }%
 }%
 
-\setbeamertemplate{block begin}{%
-  \begin{minipage}{\textwidth}\flushleft%
+\newcommand{\beamerxblockheader}{%
     \color{marron871}\raisebox{-0.5ex}{\includegraphics[width=2em]{beamerxfiletcourt}}\\
-    \color{rouge485}\rmfamily\bfseries\large%
-    \insertblocktitle{}
-
-    \color{bleu303}\sffamily\mdseries\normalsize%
 }
-\setbeamertemplate{block end}{%
-  \end{minipage}\vspace*{1mm}
+\newcommand\resetblock{%
+  \setbeamertemplate{block begin}{%
+    \begin{minipage}{\textwidth}\flushleft%
+      \beamerxblockheader%
+      \color{rouge485}\rmfamily\bfseries\large%
+      \insertblocktitle{}
+
+      \color{xtextcolor}\sffamily\mdseries\normalsize%
+  }
+  \setbeamertemplate{block end}{%
+    \end{minipage}\vspace*{1mm}
+  }
 }
 
-\setbeamercolor{alerted text}{fg=rouge485,bg=white}
-\setbeamercolor{item}{fg=bleu303,bg=white}
+\newcommand\beamerxresettemplates{%
+  \resetcolors%
+  \resetfootline%
+  \resetframetitle%
+  \resetbackgroundcanvas%
+  \resetblock%
+}
+\AtBeginDocument{\beamerxresettemplates{}}
+
+\setbeamercolor{alerted text}{fg=xalrtcolor}
+\setbeamercolor{item}{fg=xemphcolor}
+\setbeamercolor{normal text}{fg=xtextcolor}
 \setbeamertemplate{itemize items}{-}
 
 %=======================================================================
@@ -279,10 +331,10 @@
 }
 
 \let\oldauthor=\author%
-\renewcommandx\author[2][1={}]{%
+\renewcommandx\author[1]{%
     % use: \author[auteur court]{auteur}
-    \renewcommand\polyauteursave{#2}
-    \oldauthor{\rmfamily\bfseries #1}
+    \renewcommand\polyauteursave{#1}
+    \oldauthor{#1}
 }
 
 % \let\olddate=\date
@@ -295,7 +347,6 @@
 %=======================================================================
 %--- Maketitle
 \AtBeginDocument{%
-  \resetbackgroundcanvas%
   \renewcommand\maketitle{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \setbeamertemplate{background canvas}{%
@@ -306,26 +357,26 @@
             \includegraphics[width=\paperwidth,keepaspectratio]{beamerxbackground}%
           }%
         }%
-        \put(15,45){%
-          \makebox(0,0)[c]{%
+        \put(6,45){%
+          \makebox(0,0)[l]{%
             \color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}%
           }%
         }%
-        \put(1,1){%
+        \put(3,3){%
           \makebox(0,0)[lb]{%
             \begin{minipage}{0.5\paperwidth}\noindent%
               \sffamily\footnotesize\polyauteursave%
             \end{minipage}%
           }%
         }%
-        \put(159,1){%
+        \put(157,3){%
           \makebox(0,0)[rb]{%
             \begin{minipage}{0.5\paperwidth}\noindent\flushright%
               \sffamily\footnotesize\polydatesave%
             \end{minipage}%
           }%
         }%
-        \put(159,46){%
+        \put(157,46){%
           \makebox(0,0)[rb]{%
             \begin{minipage}{0.75\paperwidth}\noindent\flushright%
               \Large\setlength{\baselineskip}{0.7\baselineskip}%
@@ -333,7 +384,7 @@
             \end{minipage}%
           }%
         }%
-        \put(159,47){%
+        \put(157,47){%
           \makebox(0,0)[rt]{%
             \begin{minipage}{0.75\paperwidth}\noindent\flushright%
               \setlength{\baselineskip}{0.7\baselineskip}%
@@ -544,6 +595,89 @@
   \end{frame}%
 }
 
+%--- Picframe
+% Prototype:
+% \begin{picframe}
+%       [dark/light]
+%       {picture}
+%       [frame parameters]
+%       {title}
+\newsavebox\beamerxpicturebox%
+\newcommand\includefullpic[1]{%
+  \sbox\beamerxpicturebox{\includegraphics{#1}}%
+  \ifdim\ht\beamerxpicturebox<.5625\wd\beamerxpicturebox%
+    \includegraphics[height=\paperheight]{#1}%
+  \else%
+    \includegraphics[width=\paperwidth]{#1}%
+  \fi%
+}
+\newenvironmentx{picframe}[4][1=darkbw,3=c]{%
+  \ifthenelse{\equal{#1}{darkbw}}{%dark b&w
+    \colorlet{xfgcolor}{black}%
+    \colorlet{xtextcolor}{white}%
+    \colorlet{xbgcolor}{white}%
+    \colorlet{xemphcolor}{black}%
+    \colorlet{xalrtcolor}{rouge485dark}%
+  }{\ifthenelse{\equal{#1}{dark}}{%dark
+    \colorlet{xfgcolor}{black}%
+    \colorlet{xtextcolor}{white}%
+    \colorlet{xbgcolor}{white}%
+    \colorlet{xemphcolor}{bleu303dark}%
+    \colorlet{xalrtcolor}{rouge485dark}%
+  }{\ifthenelse{\equal{#1}{lightbw}}{%light b&w
+    \colorlet{xfgcolor}{white}%
+    \colorlet{xtextcolor}{black}%
+    \colorlet{xbgcolor}{black}%
+    \colorlet{xemphcolor}{white}%
+    \colorlet{xalrtcolor}{rouge485}%
+  }{%light
+    \colorlet{xfgcolor}{white}%
+    \colorlet{xtextcolor}{black}%
+    \colorlet{xbgcolor}{bleu303dark}%
+    \colorlet{xemphcolor}{white}%
+    \colorlet{xalrtcolor}{rouge485}%
+  }}}%
+  \colorlet{xfootcolor}{xtextcolor}%
+  \setbeamertemplate{background canvas}{%
+    \setlength{\unitlength}{0.00625\paperwidth}%
+    \begin{picture}(160,90)%
+      \put(80,45){%
+        \makebox(0,0)[c]{%
+          \includefullpic{#2}%
+        }%
+      }%
+    \end{picture}%
+  }
+  \setbeamertemplate{frametitle}{%
+    \raisebox{-\beamerxmargin}{%
+      \hspace*{-\beamerxmargin}%
+      \colorbox{xbgcolor}{%
+        \hspace*{\dimexpr\beamerxmargin-\fboxsep}%
+        \sffamily\Large\color{xemphcolor}%
+        \MakeUppercase{\insertframetitle}%
+      }%
+    }%
+  }
+  \setbeamertemplate{block begin}{%
+    \transparent{0.3}
+    \begin{adjustbox}{minipage={\textwidth-2\fboxsep},margin=\fboxsep,bgcolor=xbgcolor}\color{xemphcolor}
+      \transparent{1}
+      \color{xalrtcolor}\rmfamily\bfseries\large%
+      \insertblocktitle{}
 
+      \color{xfgcolor}\sffamily\mdseries\normalsize%
+  }
+  \setbeamertemplate{block end}{%
+    \end{adjustbox}
+    \transparent{1}
+  }
+  \begin{frame}[#3]{#4}
+}{%
+  \end{frame}
+  \resetbackgroundcanvas%
+  \resetcolors%
+  \resetframetitle%
+  \resetblock%
+}
 
 \endinput

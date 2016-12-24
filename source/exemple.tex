@@ -1,4 +1,6 @@
 % vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
+\pdfminorversion=4
+%\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
 \documentclass[aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[frenchb,noconfigs]{babel}
@@ -8,6 +10,7 @@
 
 \title[Stage de seconde année à l'École polytechnique]
       {Connecting things with Wizzilab}
+      [Wizzilab]
 \author{Clément Durand}
 
 \begin{document}
@@ -65,23 +68,105 @@
 
 \xsection{green}{Titre de ma section}
 
+\begin{picframe}[darkbw]{dark}{About cats}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Domestic}
+        Cats have been domesticated for 4000 years.
+      \end{block}
+      \begin{block}{Speed}
+        Cats can travel at speeds of up to 30km per hour.
+      \end{block}
+    \end{column}
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Groups}
+        While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens.
+        \vspace*{5ex}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth-1ex}
+    \end{column}
+  \end{columns}
+\end{picframe}
+
+\begin{picframe}[dark]{dark}{About cats}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Domestic}
+        Cats have been domesticated for 4000 years.
+      \end{block}
+      \begin{block}{Speed}
+        Cats can travel at speeds of up to 30km per hour.
+      \end{block}
+    \end{column}
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Groups}
+        While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens.
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth-1ex}
+    \end{column}
+  \end{columns}
+\end{picframe}
+
+\begin{picframe}[lightbw]{light}{About cats}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Domestic}
+        Cats have been domesticated for 4000 years.
+      \end{block}
+      \begin{block}{Speed}
+        Cats can travel at speeds of up to 30km per hour.
+      \end{block}
+    \end{column}
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Groups}
+        While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens.
+        \vspace*{5ex}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth-1ex}
+    \end{column}
+  \end{columns}
+\end{picframe}
+
+\begin{picframe}[light]{light}{About cats}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Domestic}
+        Cats have been domesticated for 4000 years.
+      \end{block}
+      \begin{block}{Speed}
+        Cats can travel at speeds of up to 30km per hour.
+      \end{block}
+    \end{column}
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Groups}
+        While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens.
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth-1ex}
+    \end{column}
+  \end{columns}
+\end{picframe}
+
 \xsubsection{green}{Titre de ma sous-section}{}
 
 \begin{frame}{Testing blocks}{Adjacent blocks}
-  \begin{columns}[t]
-    \begin{column}{0.4\textwidth}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.4\textwidth-1ex}
       \begin{block}{First element}
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus eros, venenatis congue ipsum id, tempor feugiat quam. Suspendisse in congue elit, in mattis orci.
       \end{block}
     \end{column}
 
-    \begin{column}{0.3\textwidth}
+    \begin{column}{0.3\textwidth-1ex}
       \begin{block}{Second element}
         Donec lorem lorem, faucibus a mauris et, eleifend tincidunt eros. Morbi ante metus, ullamcorper quis elit sit amet, pellentesque elementum ipsum.
       \end{block}
     \end{column}
 
-    \begin{column}{0.3\textwidth}
+    \begin{column}{0.3\textwidth-1ex}
       \begin{block}{Third element}
         Suspendisse potenti. Morbi eget lorem in massa malesuada venenatis. Morbi porta feugiat leo, in interdum dolor dapibus vel.
       \end{block}

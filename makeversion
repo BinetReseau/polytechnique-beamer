@@ -1,0 +1,144 @@
+#!/bin/bash
+getversion () {
+  git describe --tags --match "v*" --long --dirty --abbrev=8 2>/dev/null
+}
+
+checkversion () {
+  echo "$1" | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+(-beta)?" >/dev/null
+}
+
+dissectversion () {
+  echo "$1" | sed -r 's/^v([0-9]+)\.([0-9]+)\.([0-9]+)(-?(beta))?(-([0-9]+)-g([a-fA-F0-9]+)(-dirty)?)?$/\1:\2:\3:\5:\7:\8:\9:/'
+}
+
+get () {
+  echo "$2" | awk -F: '{ print $'$1' }'
+}
+
+color () {
+  fname=$(mktemp)
+  cat - > $fname
+  tput setaf $1
+  cat $fname
+  tput sgr0
+  rm -f $fname
+}
+
+red () { color 1; }
+green () { color 2; }
+blue () { color 4; }
+
+compareversions () {
+  _old="$1"
+  _new="$2"
+  oldM=$(get 1 "$_old")
+  oldm=$(get 2 "$_old")
+  oldp=$(get 3 "$_old")
+  newM=$(get 1 "$_new")
+  newm=$(get 2 "$_new")
+  newp=$(get 3 "$_new")
+  dM=$((newM-oldM))
+  dm=$((newm-oldm))
+  dp=$((newp-oldp))
+  echo "$dM:$dm:$dp"
+}
+
+makechangelog () {
+  echo -e "\n# Enter here the informations about changes in your program in version %s." "$newv" > release/changelog
+  tag=${oldv%%-*};
+  git log --oneline "$tag"..HEAD | sed 's/^/# /' >> release/changelog
+  vim -c 'set ft=gitcommit | set tw=80 | set cc=+1 | startinsert' release/changelog
+  wc=$(sed '/^#/ d' release/changelog | wc -w)
+  if [ $wc -gt 0 ]; then
+    {
+      cat release/changelog_before
+      cat release/changelog_template
+      sed '/^#/ d' release/changelog
+      echo ""
+      cat release/changelog_after
+    } | uniq > CHANGELOG.md
+    rm -f release/changelog_before
+    rm -f release/changelog_template
+    rm -f release/changelog_after
+    sed -i '/^#/ d' release/changelog
+  else
+    printf "Refusing to make version '%s' with empty changelog.\n" "$newv" | red; exit 1;
+  fi;
+}
+
+newv=v$1; shift;
+if { checkversion $newv; }; then
+  printf "Valid version '%s'.\n" "$newv" | green;
+else
+  printf "Invalid version '%s'.\n" "$newv" | red; exit 1;
+fi
+
+oldv=$(getversion);
+printf "Current version '%s'.\n" "$oldv" | blue;
+
+newd=$(dissectversion "$newv");
+oldd=$(dissectversion "$oldv");
+
+delta=$(compareversions "$oldd" "$newd");
+
+x=$(get 7 "$oldd");
+if [ -n "$x" ]; then
+  printf "Refusing to make version '%s' on a dirty repository.\n" "$newv" | red; exit 1;
+fi;
+
+mkdir -p release/
+
+x=$(get 1 "$delta");
+if [ $x -lt 0 ]; then
+  printf "Refusing to make version '%s' with older Major than '%s'.\n" "$newv" "$oldv" | red; exit 1;
+elif [ $x -gt 0 ]; then
+  printf "New Major.\n" | green;
+  y=$(get 1 "$oldd");
+  sed '/# '"$y"'$/,// d' CHANGELOG.md > release/changelog_before
+  sed -n '/# '"$y"'$/,// p' CHANGELOG.md > release/changelog_after
+  M=$(get 1 "$newd");
+  m=$M.$(get 2 "$newd");
+  p=${newv:1};
+  echo -e "# $M\n\n## $m\n\n### $p\n" > release/changelog_template
+else
+  printf "Same Major.\n" | blue;
+  x=$(get 2 "$delta");
+  if [ $x -lt 0 ]; then
+    printf "Refusing to make version '%s' with older minor than '%s'.\n" "$newv" "$oldv" | red; exit 1;
+  elif [ $x -gt 0 ]; then
+    printf "New minor.\n" | green;
+    y=$(get 1 "$oldd")'\.'$(get 2 "$oldd");
+    sed '/## '"$y"'$/,// d' CHANGELOG.md > release/changelog_before;
+    sed -n '/## '"$y"'$/,// p' CHANGELOG.md > release/changelog_after;
+    m=$(get 1 "$newd").$(get 2 "$newd");
+    p=${newv:1};
+    echo -e "## $m\n\n### $p\n" > release/changelog_template
+  else
+    printf "Same minor.\n" | blue;
+    x=$(get 3 "$delta");
+    if [ $x -lt 0 ]; then
+      printf "Refusing to make version '%s' with older patch than '%s'.\n" "$newv" "$oldv" | red; exit 1;
+    elif [ $x -gt 0 ]; then
+      printf "New patch.\n" | green;
+      y=$(get 1 "$oldd")'\.'$(get 2 "$oldd")'\.'$(get 3 "$oldd");
+      sed '/### '"$y"'[^0-9]*$/,// d' CHANGELOG.md > release/changelog_before;
+      sed -n '/### '"$y"'[^0-9]*$/,// p' CHANGELOG.md > release/changelog_after;
+      p=${newv:1};
+      echo -e "### $p\n" > release/changelog_template
+    else
+      printf "Refusing to make already existing version '%s'.\n" "$newv" | red; exit 1;
+    fi;
+  fi;
+fi;
+makechangelog;
+
+git add CHANGELOG.md && {
+  nparents=$(git cat-file -p HEAD | sed -n '/^parent/ p' | wc -l)
+  if [ $nparents -gt 1 ]; then
+    flags=--amend;
+  else
+    flags=;
+  fi;
+} &&
+git commit $flags -S -m "releasing $newv" &&
+git tag "$newv" -s -F release/changelog
