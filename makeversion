@@ -4,7 +4,7 @@ getversion () {
 }
 
 checkversion () {
-  echo "$1" | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+(-?beta)?" >/dev/null
+  echo "$1" | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+(-beta)?" >/dev/null
 }
 
 dissectversion () {

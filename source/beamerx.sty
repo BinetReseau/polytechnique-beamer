@@ -278,7 +278,7 @@
       \color{rouge485}\rmfamily\bfseries\large%
       \insertblocktitle{}
 
-      \color{bleu303}\sffamily\mdseries\normalsize%
+      \color{xtextcolor}\sffamily\mdseries\normalsize%
   }
   \setbeamertemplate{block end}{%
     \end{minipage}\vspace*{1mm}
@@ -296,7 +296,7 @@
 
 \setbeamercolor{alerted text}{fg=xalrtcolor}
 \setbeamercolor{item}{fg=xemphcolor}
-\setbeamercolor{normal text}{fg=xfgcolor}
+\setbeamercolor{normal text}{fg=xtextcolor}
 \setbeamertemplate{itemize items}{-}
 
 %=======================================================================
@@ -331,10 +331,10 @@
 }
 
 \let\oldauthor=\author%
-\renewcommandx\author[2][1={}]{%
+\renewcommandx\author[1]{%
     % use: \author[auteur court]{auteur}
-    \renewcommand\polyauteursave{#2}
-    \oldauthor{\rmfamily\bfseries #1}
+    \renewcommand\polyauteursave{#1}
+    \oldauthor{#1}
 }
 
 % \let\olddate=\date
