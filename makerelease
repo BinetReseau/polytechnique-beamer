@@ -1,0 +1,28 @@
+#!/bin/bash
+getversion () {
+  git describe --tags --match "v*" --long --dirty --abbrev=8 2>/dev/null
+}
+
+getreponame () {
+  git remote -v | grep origin | head -n1 | sed 's/\.git\s.*$//; s%^.*/%%'
+}
+
+mkdir -p release/
+archname="$(getreponame)-$(getversion)";
+find release/ -name "$archname"'.*' -delete
+archname="release/$archname";
+tgzname="$archname.tar.gz";
+zipname="$archname.zip";
+
+make cleandist &&
+make &&
+{
+  find . -type f -name '*.tex'\
+             -or -name '*.pdf'\
+             -or -name '*.sty'\
+             -or -name '*.jpg'\
+             -or -name '*.md'\
+             -or -name 'LICENSE*'
+} | tee >(xargs -d'\n' tar czf "$tgzname") >(xargs -d'\n' zip -q "$zipname") | cat - &&
+gpg2 --armor --output "$zipname.asc" --detach-sign "$zipname" &&
+gpg2 --armor --output "$tgzname.asc" --detach-sign "$tgzname"
