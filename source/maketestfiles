@@ -1,0 +1,47 @@
+#!/bin/bash
+srcfile=$1;
+if [ -z "$srcfile" ]; then
+  echo >&2 "No file specified."
+  exit 1
+elif [ ! -f "$srcfile" ]; then
+  echo >&2 "File '$srcfile' does not exist."
+  exit 1
+elif [ "${srcfile##*.}" != "tex" ]; then
+  echo >&2 "File '$srcfile' is not a tex file."
+  exit 1
+fi;
+pdffile=${srcfile%.*}.pdf;
+echo >&2 "Making '$pdffile' from '$srcfile'."
+{
+  pdflatex "$srcfile" &>/dev/null &&
+  pdflatex "$srcfile" &>/dev/null &&
+  pdflatex "$srcfile" &>/dev/null &&
+  cp "$pdffile" "pdflatex_$pdffile" &&
+  echo "pdflatex_$pdffile" &&
+  rm -f "$pdffile" &&
+  echo >&2 "pdflatex: OK" &&
+  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -sOutputFile="gs_pdflatex_$pdffile" "pdflatex_$pdffile" &>/dev/null &&
+  echo "gs_pdflatex_$pdffile"
+} || echo >&2 "pdflatex: FAILURE"
+{
+  xelatex "$srcfile" &>/dev/null &&
+  xelatex "$srcfile" &>/dev/null &&
+  xelatex "$srcfile" &>/dev/null &&
+  cp "$pdffile" "xelatex_$pdffile" &&
+  echo "xelatex_$pdffile" &&
+  rm -f "$pdffile" &&
+  echo >&2 "xelatex: OK" &&
+  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -sOutputFile="gs_xelatex_$pdffile" "xelatex_$pdffile" &>/dev/null &&
+  echo "gs_xelatex_$pdffile"
+} || echo >&2 "xelatex: FAILURE"
+{
+  lualatex "$srcfile" &>/dev/null &&
+  lualatex "$srcfile" &>/dev/null &&
+  lualatex "$srcfile" &>/dev/null &&
+  cp "$pdffile" "lualatex_$pdffile" &&
+  echo "lualatex_$pdffile" &&
+  rm -f "$pdffile" &&
+  echo >&2 "lualatex: OK" &&
+  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -sOutputFile="gs_lualatex_$pdffile" "lualatex_$pdffile" &>/dev/null &&
+  echo "gs_lualatex_$pdffile"
+} || echo >&2 "lualatex: FAILURE"

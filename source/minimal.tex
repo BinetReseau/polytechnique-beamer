@@ -1,0 +1,95 @@
+% vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[frenchb,noconfigs]{babel}
+
+\usepackage{beamerx}
+\usepackage{lipsum}
+
+\title[Stage de seconde année à l'École polytechnique]
+      {Connecting things with Wizzilab}
+      [Wizzilab]
+\author{Clément Durand}
+
+\begin{document}
+\maketitle
+
+\xsection{blue}{Titre de ma section}
+
+\xsubsection{red}{Titre de ma sous-section}{Sous-titre de ma sous-section}
+
+\begin{frame}{Control frame}{Checking everything works}
+  \lipsum[1]
+\end{frame}
+
+\begin{picframe}[lightbw]{light}{About cats}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Domestic}
+        Cats have been domesticated for 4000 years.
+      \end{block}
+      \begin{block}{Speed}
+        Cats can travel at speeds of up to 30km per hour.
+      \end{block}
+    \end{column}
+    \begin{column}{0.25\textwidth}
+      \begin{block}{Groups}
+        While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens.
+        \vspace*{5ex}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth-1ex}
+    \end{column}
+  \end{columns}
+\end{picframe}
+
+\begin{frame}{Testing blocks}
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.4\textwidth-1ex}
+      \begin{block}{First element}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tellus eros, venenatis congue ipsum id, tempor feugiat quam.
+      \end{block}
+      \begin{block}{Second element}
+        Suspendisse in congue elit, in mattis orci.
+      \end{block}
+    \end{column}
+
+    \begin{column}{0.3\textwidth-1ex}
+      \begin{block}{Third element}
+        Donec lorem lorem, faucibus a mauris et, eleifend tincidunt eros. Morbi ante metus, ullamcorper quis elit sit amet, pellentesque elementum ipsum.
+      \end{block}
+    \end{column}
+
+    \begin{column}{0.3\textwidth-1ex}
+      \begin{block}{Fourth element}
+        Suspendisse potenti. Morbi eget lorem in massa malesuada venenatis. Morbi porta feugiat leo, in interdum dolor dapibus vel.
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Lists}
+
+  \begin{itemize}
+    \item a
+    \item b
+      \begin{itemize}
+        \item ba
+        \item bb
+      \end{itemize}
+    \item c
+  \end{itemize}
+
+  \begin{enumerate}
+    \item a
+      \begin{enumerate}
+        \item aa
+          \begin{enumerate}
+            \item aaa
+          \end{enumerate}
+      \end{enumerate}
+    \item b
+  \end{enumerate}
+\end{frame}
+
+\end{document}

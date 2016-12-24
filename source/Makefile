@@ -2,7 +2,7 @@
 
 TEXFILES:=$(shell find . -type f -name '*.tex')
 
-all: $(patsubst %.tex,%.pdf,$(TEXFILES))
+all: minimal.pdf
 
 %.pdf: %.tex
 	pdflatex -interaction=nonstopmode $<
