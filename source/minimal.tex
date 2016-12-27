@@ -1,6 +1,15 @@
 % vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
 \documentclass[aspectratio=169]{beamer}
-\usepackage[utf8]{inputenc}
+\usepackage{ifluatex,ifxetex}
+\ifluatex%
+  \usepackage{fontspec}
+  \setsansfont{Comfortaa}
+\else\ifxetex%
+  \usepackage{fontspec}
+\else%
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi\fi%
 \usepackage[frenchb,noconfigs]{babel}
 
 \usepackage{beamerx}
