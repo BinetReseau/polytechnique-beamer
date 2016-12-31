@@ -1,4 +1,10 @@
 #!/bin/bash
+if [ $# -eq 0 ]; then
+  echo >&2 "makerelease: creates release archives"
+  echo >&2 "Usage: $0 {destination folder to be emptied}"
+  exit 1;
+fi
+
 getversion () {
   git describe --tags --match "v*" --long --dirty --abbrev=8 2>/dev/null
 }
@@ -7,12 +13,14 @@ getreponame () {
   git remote -v | grep origin | head -n1 | sed 's/\.git\s.*$//; s%^.*/%%'
 }
 
-mkdir -p release/
-archname="$(getreponame)-$(getversion)";
-find release/ -name "$archname"'.*' -delete
-archname="release/$archname";
-tgzname="$archname.tar.gz";
-zipname="$archname.zip";
+folder=$1; shift;
+folder=${folder%/};
+
+mkdir -p $folder
+find $folder -type f -delete
+arch="$(getreponame)-$(getversion)";
+tgz="$arch.tar.gz";
+zip="$arch.zip";
 
 make cleandist &&
 make &&
@@ -23,6 +31,12 @@ make &&
              -or -name '*.jpg'\
              -or -name '*.md'\
              -or -name 'LICENSE*'
-} | tee >(xargs -d'\n' tar czf "$tgzname") >(xargs -d'\n' zip -q "$zipname") | cat - &&
-gpg2 --armor --output "$zipname.asc" --detach-sign "$zipname" &&
-gpg2 --armor --output "$tgzname.asc" --detach-sign "$tgzname"
+} | tee >(xargs -d'\n' tar czf "$folder/$tgz") >(xargs -d'\n' zip -q "$folder/$zip") | cat - && {
+  cd $folder &&
+  gpg2 --armor --output "$zip.sig" --detach-sign "$zip" &&
+  gpg2 --armor --output "$tgz.sig" --detach-sign "$tgz" &&
+  md5sum "$tgz" > "$tgz.md5" &&
+  md5sum "$zip" > "$zip.md5" &&
+  sha256sum "$tgz" > "$tgz.sha256" &&
+  sha256sum "$zip" > "$zip.sha256";
+}
