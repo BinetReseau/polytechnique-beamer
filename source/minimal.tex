@@ -3,7 +3,27 @@
 \usepackage{ifluatex,ifxetex}
 \ifluatex%
   \usepackage{fontspec}
-  \setsansfont{Comfortaa}
+  \setsansfont{Muli}[
+    Extension=.ttf,
+    UprightFont=*-Regular,
+    ItalicFont=*-Italic,
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldItalic
+  ]
+  \setromanfont{DroidSerif}[
+    Extension=.ttf,
+    UprightFont=*,
+    ItalicFont=*-Italic,
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldItalic
+  ]
+  \setmonofont{RobotoMono}[
+    Extension=.ttf,
+    UprightFont=*-Regular,
+    ItalicFont=*-Italic,
+    BoldFont=*-Bold,
+    BoldItalicFont=*-BoldItalic
+  ]
 \else\ifxetex%
   \usepackage{fontspec}
 \else%
