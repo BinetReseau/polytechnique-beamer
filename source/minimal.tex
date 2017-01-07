@@ -1,36 +1,11 @@
 % vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
 \documentclass[aspectratio=169]{beamer}
+\usepackage[frenchb,noconfigs]{babel}
 \usepackage{ifluatex,ifxetex}
-\ifluatex%
-  \usepackage{fontspec}
-  \setsansfont{Muli}[
-    Extension=.ttf,
-    UprightFont=*-Regular,
-    ItalicFont=*-Italic,
-    BoldFont=*-Bold,
-    BoldItalicFont=*-BoldItalic
-  ]
-  \setromanfont{DroidSerif}[
-    Extension=.ttf,
-    UprightFont=*,
-    ItalicFont=*-Italic,
-    BoldFont=*-Bold,
-    BoldItalicFont=*-BoldItalic
-  ]
-  \setmonofont{RobotoMono}[
-    Extension=.ttf,
-    UprightFont=*-Regular,
-    ItalicFont=*-Italic,
-    BoldFont=*-Bold,
-    BoldItalicFont=*-BoldItalic
-  ]
-\else\ifxetex%
-  \usepackage{fontspec}
-\else%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
-\fi\fi%
-\usepackage[frenchb,noconfigs]{babel}
+\fi
 
 \usepackage{beamerx}
 \usepackage{lipsum}
@@ -64,7 +39,6 @@
     \begin{column}{0.25\textwidth}
       \begin{block}{Groups}
         While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens.
-        \vspace*{5ex}
       \end{block}
     \end{column}
     \begin{column}{0.5\textwidth-1ex}
