@@ -1,4 +1,4 @@
-.PHONY: all clean cleandist
+.PHONY: all clean cleandist linux-install
 
 all:
 	make -C source/ all
@@ -8,3 +8,6 @@ clean:
 
 cleandist:
 	make -C source/ cleandist
+
+linux-install:
+	sudo ./install/linux.sh
