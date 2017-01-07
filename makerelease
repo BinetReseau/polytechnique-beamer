@@ -31,6 +31,7 @@ make &&
              -or -name '*.jpg'\
              -or -name '*.md'\
              -or -name 'LICENSE*'
+  find ./install/
 } | tee >(xargs -d'\n' tar czf "$folder/$tgz") >(xargs -d'\n' zip -q "$folder/$zip") | cat - && {
   cd $folder &&
   gpg2 --armor --output "$zip.sig" --detach-sign "$zip" &&
