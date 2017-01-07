@@ -10,4 +10,7 @@ cleandist:
 	make -C source/ cleandist
 
 linux-install:
-	sudo ./install/linux.sh
+	sudo ./install/unix.sh
+
+mac-install:
+	sudo ./install/unix.sh
