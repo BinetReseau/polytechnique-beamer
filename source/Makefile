@@ -4,6 +4,9 @@ TEXFILES:=$(shell find . -type f -name '*.tex')
 
 all: minimal.pdf
 
+minimal.pdf: minimal.tex
+	lualatex -interaction=nonstopmode $<
+
 %.pdf: %.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<

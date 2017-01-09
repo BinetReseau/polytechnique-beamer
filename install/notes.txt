@@ -1,8 +1,0 @@
-On linux:
-  TEXMFLOCAL="$(kpsewhich -var-value TEXMFLOCAL)"
-  PACKAGE="$TEXMFLOCAL/tex/latex/polytechnique-beamer/"
-  FONTS="$TEXMFLOCAL/fonts/truetype/GoogleFonts/"
-  mkdir -p "$PACKAGE" "$FONTS"
-  cat .packages | xargs -d'\n' -n1 cp -v -t "$PACKAGE"
-  cat .fonts | xargs -d'\n' -n1 cp -v -t "$FONTS"
-  texhash || mktexlsr

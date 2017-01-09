@@ -31,12 +31,12 @@ make &&
              -or -name '*.jpg'\
              -or -name '*.md'\
              -or -name 'LICENSE*'
+  find ./install/
+  find ./fonts/
 } | tee >(xargs -d'\n' tar czf "$folder/$tgz") >(xargs -d'\n' zip -q "$folder/$zip") | cat - && {
   cd $folder &&
   gpg2 --armor --output "$zip.sig" --detach-sign "$zip" &&
   gpg2 --armor --output "$tgz.sig" --detach-sign "$tgz" &&
-  md5sum "$tgz" > "$tgz.md5" &&
-  md5sum "$zip" > "$zip.md5" &&
-  sha256sum "$tgz" > "$tgz.sha256" &&
-  sha256sum "$zip" > "$zip.sha256";
+  md5sum "$tgz" "$zip" > "$arch.md5" &&
+  sha256sum "$tgz" "$zip" > "$arch.sha256";
 }

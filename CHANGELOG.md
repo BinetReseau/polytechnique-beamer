@@ -1,5 +1,14 @@
 # 2
 
+## 2.1
+
+### 2.1.0
+
+* Added font support for XeLaTeX and LuaLaTeX. This means you need to install
+the fonts (refer to the install section of the wiki) in order to keep it working
+with these compilers.
+* Install script for unix systems.
+
 ## 2.0
 
 ### 2.0.2-beta
