@@ -1,11 +1,7 @@
-# polytechnique-beamer
+# About
 
-Ce dossier contient la source du package pour les diaporamas à l'École polytechnique.
+This LaTeX package allows students from the [École polytechnique](www.polytechnique.edu) to create slides (using beamer) having the recommended layout.
 
-# Install
+# Howto
 
-To install the package, you can run the corresponding script in `install/` or do a manual package install and put the files from `source/` and `fonts/` in the correct folders.
-
-```sh
-sudo ./install/linux.sh
-```
+You can find help about how to install and use the package on [the repo's wiki](https://github.com/BinetReseau/polytechnique-beamer/wiki/).
