@@ -24,6 +24,8 @@ x add font support for lualatex/linux first (we'll see then for other distribs)
 - default color theme
   the user can choose a default color theme, and it defines the \section and
   \subsection commands
-- install script for windows
+  if the user doesn't choose, the \section and \subsection commands remain unchanged
+x install script for windows
 - test font support on windows
-- think about integrating another logo (mail dircom)
+- integration of another logo : stack with horizontal logo of the school
+- integration of a company name : with ÉCOLE POLYTECHNIQUE - COMPANY - ...
