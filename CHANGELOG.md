@@ -2,6 +2,11 @@
 
 ## 2.1
 
+### 2.1.1
+
+* Some corrections
+* Windows install script
+
 ### 2.1.0
 
 * Added font support for XeLaTeX and LuaLaTeX. This means you need to install
