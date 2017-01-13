@@ -260,12 +260,17 @@
 \setbeamersize{text margin right=\beamerxmargin}
 
 \newcommand{\beamerxshorttitle}{-- \insertshorttitle}
+\newcommand{\beamerxcompany}{}
+\newcommand{\company}[1]{%
+  \renewcommand{\beamerxcompany}{-- \textbf{#1} }%
+}
+\newcommand{\beamerxfootleft}{\textbf{ÉCOLE POLYTECHNIQUE} \beamerxcompany}
 \newcommand\resetfootline{%
   \setbeamertemplate{footline}{%
     \color{xfootcolor}%
     \hspace*{\beamerxmargin}%
     \raisebox{\beamerxmargin}{%
-      \textbf{ÉCOLE POLYTECHNIQUE} %
+      \beamerxfootleft%
       \beamerxshorttitle%
     }%
     \hspace*{\fill}
