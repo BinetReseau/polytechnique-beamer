@@ -378,6 +378,20 @@
 % Diapos conforme charte graphique
 %=======================================================================
 %--- Maketitle
+\def\includebeamerxlogo{}
+\newcommand{\nologo}[1]{%
+  \renewcommand{\includebeamerxlogo}{\color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}}
+}
+\nologo{}
+\def\logo{}
+\renewcommand{\logo}[1]{%
+  \renewcommand{\includebeamerxlogo}{%
+    \begin{minipage}{0.18377693\paperheight}\color{white}\centering%
+      \includegraphics[width=\textwidth,keepaspectratio]{beamerxlogo}\\[0.01250\paperwidth]
+      \includegraphics[width=\textwidth,keepaspectratio]{#1}
+    \end{minipage}
+  }%
+}
 \AtBeginDocument{%
   \renewcommand\maketitle{%
     \setlength{\unitlength}{0.00625\paperwidth}%
@@ -391,7 +405,7 @@
         }%
         \put(6,45){%
           \makebox(0,0)[l]{%
-            \color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}%
+            \includebeamerxlogo{}%
           }%
         }%
         \put(3,3){%
