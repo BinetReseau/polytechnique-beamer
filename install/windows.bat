@@ -1,4 +1,5 @@
 @ECHO OFF
+CD ..
 FOR /F %%i IN ('kpsewhich -var-value TEXMFLOCAL') DO SET TEXMFLOCAL=%%i
 SET PACKAGEFOLDER=%TEXMFLOCAL%/tex/latex/beamerx
 SET FONTSFOLDER=%TEXMFLOCAL%/fonts

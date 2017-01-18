@@ -1,4 +1,6 @@
 #!/bin/sh
+cd "$(readlink -m "$0/../../")" # chdir to the root directory of the package archive
+
 TEXMFLOCAL="$(kpsewhich -var-value TEXMFLOCAL)"
 PACKAGE="$TEXMFLOCAL/tex/latex/beamerx/"
 FONTS="$TEXMFLOCAL/fonts/truetype/"
