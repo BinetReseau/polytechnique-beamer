@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerx}[2016/12/11 v2.0.0beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
+\ProvidesPackage{beamerx}[2017/01/19 v2.2.0-beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
 
 %=======================================================================
 % Declaration des options
@@ -260,12 +260,17 @@
 \setbeamersize{text margin right=\beamerxmargin}
 
 \newcommand{\beamerxshorttitle}{-- \insertshorttitle}
+\newcommand{\beamerxcompany}{}
+\newcommand{\company}[1]{%
+  \renewcommand{\beamerxcompany}{-- \textbf{#1} }%
+}
+\newcommand{\beamerxfootleft}{\textbf{ÉCOLE POLYTECHNIQUE} \beamerxcompany}
 \newcommand\resetfootline{%
   \setbeamertemplate{footline}{%
     \color{xfootcolor}%
     \hspace*{\beamerxmargin}%
     \raisebox{\beamerxmargin}{%
-      \textbf{ÉCOLE POLYTECHNIQUE} %
+      \beamerxfootleft%
       \beamerxshorttitle%
     }%
     \hspace*{\fill}
@@ -373,6 +378,20 @@
 % Diapos conforme charte graphique
 %=======================================================================
 %--- Maketitle
+\def\includebeamerxlogo{}
+\newcommand{\nologo}[1]{%
+  \renewcommand{\includebeamerxlogo}{\color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}}
+}
+\nologo{}
+\def\logo{}
+\renewcommand{\logo}[1]{%
+  \renewcommand{\includebeamerxlogo}{%
+    \begin{minipage}{0.18377693\paperheight}\color{white}\centering%
+      \includegraphics[width=\textwidth,keepaspectratio]{beamerxlogo}\\[0.01250\paperwidth]
+      \includegraphics[width=\textwidth,keepaspectratio]{#1}
+    \end{minipage}
+  }%
+}
 \AtBeginDocument{%
   \renewcommand\maketitle{%
     \setlength{\unitlength}{0.00625\paperwidth}%
@@ -386,7 +405,7 @@
         }%
         \put(6,45){%
           \makebox(0,0)[l]{%
-            \color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}%
+            \includebeamerxlogo{}%
           }%
         }%
         \put(3,3){%

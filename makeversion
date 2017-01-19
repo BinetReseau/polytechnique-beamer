@@ -137,6 +137,9 @@ else
 fi;
 makechangelog;
 
+find . -type f -name '*.sty' | xargs -n1 -d'\n' sed -i '/\\ProvidesPackage/ s/\[[^,]*,/\['"$(date +%Y\\/%m\\/%d)"' '"$newv"',/'
+find . -type f -name '*.sty' | xargs -n1 -d'\n' git add
+
 git add CHANGELOG.md && {
   nparents=$(git cat-file -p HEAD | sed -n '/^parent/ p' | wc -l)
   if [ $nparents -gt 1 ]; then

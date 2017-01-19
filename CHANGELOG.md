@@ -1,5 +1,12 @@
 # 2
 
+## 2.2
+
+### 2.2.0-beta
+
+* Possibility to add the image (logo and name) of another company
+* A few corrections of the way the package has to be installed
+
 ## 2.1
 
 ### 2.1.1
