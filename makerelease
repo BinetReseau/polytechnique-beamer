@@ -35,8 +35,9 @@ make &&
   find ./fonts/
 } | tee >(xargs -d'\n' tar czf "$folder/$tgz") >(xargs -d'\n' zip -q "$folder/$zip") | cat - && {
   cd $folder &&
-  gpg2 --armor --output "$zip.sig" --detach-sign "$zip" &&
-  gpg2 --armor --output "$tgz.sig" --detach-sign "$tgz" &&
-  md5sum "$tgz" "$zip" > "$arch.md5" &&
-  sha256sum "$tgz" "$zip" > "$arch.sha256";
+  #gpg2 --armor --output "$zip.sig" --detach-sign "$zip" &&
+  #gpg2 --armor --output "$tgz.sig" --detach-sign "$tgz" &&
+  #md5sum "$tgz" "$zip" > "md5sums" &&
+  sha256sum "$tgz" "$zip" > "sha256sums" &&
+  gpg2 --armor --output "sha256sums.sig" --detach-sign "sha256sums";
 }
