@@ -21,11 +21,12 @@ x makerelease script
 x lighter release archive (remove exemple.tex and unnecessary pictures)
 x install scripts (step by step)
 x add font support for lualatex/linux first (we'll see then for other distribs)
-o default color theme
-  the user can choose a default color theme, and it defines the \section and
-  \subsection commands
-  if the user doesn't choose, the \section and \subsection commands remain unchanged
+o default color theme                                                                     <  Aborted :
+  the user can choose a default color theme, and it defines the \section and               | This would also require choosing a default picture,
+  \subsection commands                                                                     | and doesn't seem to fit the situations I imagine.
+  if the user doesn't choose, the \section and \subsection commands remain unchanged       \____________________________________________________
 x install script for windows
 - test font support on windows
 x integration of another logo : stack with horizontal logo of the school
 x integration of a company name : with ÉCOLE POLYTECHNIQUE - COMPANY - ...
+o aspectratio=43 version
