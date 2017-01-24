@@ -1,0 +1,23 @@
+% vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
+\documentclass{beamerx}
+\usepackage[frenchb,noconfigs]{babel}
+\usepackage{ifluatex,ifxetex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi
+
+\usepackage{lipsum}
+
+\title[Subtitle]
+      {Title}
+      [Short title]
+\author{Clément Durand}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Title}
+  \lipsum[1]
+\end{frame}
+\end{document}

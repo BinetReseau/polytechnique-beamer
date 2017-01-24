@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerx}[2017/01/19 v2.2.0-beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
+\ProvidesClass{beamerx}[2017/01/19 v2.2.0-beta, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
 
 %=======================================================================
 % Declaration des options
@@ -21,7 +21,10 @@
     \renewcommand{\beamerxblockheader}{}
   }
 }
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions*
+\LoadClass[aspectratio=169]{beamer}
+\relax
 %=======================================================================
 % Package requis
 %=======================================================================
