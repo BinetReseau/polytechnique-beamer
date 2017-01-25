@@ -394,6 +394,13 @@
 \def\polysoustitresave{}
 \def\polyauteursave{}
 \def\polydatesave{\today}
+\def\polylogosave{beamerxlogo}
+\def\polybackgroundsave{beamerxbackground}
+\def\polylogocolor{white}
+\def\polytitlefontcolor{white}
+\def\polysubtitlefontcolor{white}
+\def\polyauthorfontcolor{white}
+\def\polydatefontcolor{white}
 
 %---------- Mise en page
 \newcommand{\MakeUppercaseWithNewline}[1]{%
@@ -429,13 +436,51 @@
     \renewcommand\polydatesave{#1}
 }
 
+\let\oldlogo=\logo
+\renewcommand\logo[1]{%
+    \renewcommand\polylogosave{#1}
+}
+
+\newcommand\background[1]{%
+    \renewcommand\polybackgroundsave{#1}
+}
+
+\newcommand\titlepagefontcolor[1]{%
+    \renewcommand\polylogocolor{#1}%
+    \renewcommand\polytitlefontcolor{#1}%
+    \renewcommand\polysubtitlefontcolor{#1}%
+    \renewcommand\polyauthorfontcolor{#1}%
+    \renewcommand\polydatefontcolor{#1}
+}
+
+\newcommand\logocolor[1]{%
+    \renewcommand\polylogocolor{#1}
+}
+
+\newcommand\titlecolor[1]{%
+    \renewcommand\polytitlefontcolor{#1}%
+    \renewcommand\polysubtitlefontcolor{#1}
+}
+
+\newcommand\subtitlecolor[1]{%
+    \renewcommand\polysubtitlefontcolor{#1}
+}
+
+\newcommand\authorcolor[1]{%
+    \renewcommand\polyauthorfontcolor{#1}
+}
+
+\newcommand\datecolor[1]{%
+    \renewcommand\polydatefontcolor{#1}
+}
+
 %=======================================================================
 % Diapos conforme charte graphique
 %=======================================================================
 %--- Maketitle
 \def\includebeamerxlogo{}
 \newcommand{\nologo}[1]{%
-  \renewcommand{\includebeamerxlogo}{\color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}}
+  \renewcommand{\includebeamerxlogo}{\color{\polylogocolor}\includegraphics[height=0.25\paperheight,keepaspectratio]{\polylogosave}}
 }
 \newlength\logoheight
 \setlength\logoheight{.25\paperheight}
@@ -460,7 +505,8 @@
         \setcounter{bmrX}{\thebmrW/2}\setcounter{bmrY}{\thebmrH/2}%
         \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[c]{%
-            \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}%
+            \includegraphics[height=\paperheight,keepaspectratio]{\polybackgroundsave}%
+            \includegraphics[width=\paperwidth,keepaspectratio]{}%
           }%
         }%
         \setcounter{bmrX}{2*\thebmrTPmargin}%
@@ -472,7 +518,7 @@
         \put(\thebmrTPmargin,\thebmrTPmargin){%
           \makebox(0,0)[lb]{%
             \begin{minipage}{.5\paperwidth}\noindent%
-              \sffamily\footnotesize\polyauteursave\hspace*{0pt}%
+                \color{\polyauthorfontcolor}\sffamily\footnotesize\polyauteursave\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
@@ -480,7 +526,7 @@
         \put(\thebmrX,\thebmrTPmargin){%
           \makebox(0,0)[rb]{%
             \begin{minipage}{.5\paperwidth}\noindent\flushright%
-              \sffamily\footnotesize\polydatesave\hspace*{0pt}%
+                \color{\polydatefontcolor}\sffamily\footnotesize\polydatesave\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
@@ -489,7 +535,7 @@
           \makebox(0,0)[rb]{%
             \begin{minipage}{0.75\paperwidth}\noindent\flushright%
               \Large\setlength{\baselineskip}{0.7\baselineskip}%
-              \sffamily\bfseries\MakeUppercaseWithNewline{\polytitresave}\hspace*{0pt}%
+              \color{\polytitlefontcolor}\sffamily\bfseries\MakeUppercaseWithNewline{\polytitresave}\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
@@ -498,7 +544,7 @@
           \makebox(0,0)[rt]{%
             \begin{minipage}{0.75\paperwidth}\noindent\flushright%
               \setlength{\baselineskip}{0.7\baselineskip}%
-              \sffamily\polysoustitresave\hspace*{0pt}%
+              \color{\polysubtitlefontcolor}\sffamily\polysoustitresave\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
@@ -507,6 +553,7 @@
     \begin{frame}[plain,c]
     \end{frame}
     \resetbackgroundcanvas{}
+    \resetcolors{}
   }
 }
 
