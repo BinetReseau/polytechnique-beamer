@@ -265,6 +265,9 @@
 %\definecolor{theme-altbg}{RGB}{}
 %\definecolor{theme-fg}{RGB}{}
 
+\colorlet{blocktitlecolor}{rouge485}
+\colorlet{blocktitlecolordark}{rouge485dark}
+
 %=======================================================================
 % Definition du theme beamer
 %=======================================================================
@@ -278,7 +281,7 @@
   \colorlet{xbgcolor}{white}%
   \colorlet{xtextcolor}{black}%
   \colorlet{xemphcolor}{bleu303}%
-  \colorlet{xalrtcolor}{rouge485}%
+  \colorlet{xalrtcolor}{blocktitlecolor}%
   \colorlet{xfootcolor}{xtextcolor}%
   \colorlet{xheadcolor}{xemphcolor}%
 }
@@ -362,7 +365,7 @@
   \setbeamertemplate{block begin}{%
     \begin{minipage}{\textwidth}\flushleft%
       \beamerxblockheader%
-      \color{rouge485}\rmfamily\bfseries\large%
+      \color{blocktitlecolor}\rmfamily\bfseries\large%
       \insertblocktitle{}
 
       \color{xemphcolor}\sffamily\mdseries\normalsize%
@@ -472,6 +475,11 @@
 
 \newcommand\datecolor[1]{%
     \renewcommand\polydatefontcolor{#1}
+}
+
+\newcommand\setblocktitlecolor[1]{%
+    \colorlet{blocktitlecolor}{#1}%
+    \colorlet{blocktitlecolordark}{black!20!#1}%
 }
 
 %=======================================================================
@@ -792,25 +800,25 @@
     \colorlet{xtextcolor}{white}%
     \colorlet{xbgcolor}{white}%
     \colorlet{xemphcolor}{black}%
-    \colorlet{xalrtcolor}{rouge485dark}%
+    \colorlet{xalrtcolor}{blocktitlecolordark}%
   }{\ifthenelse{\equal{#1}{dark}}{%dark
     \colorlet{xfgcolor}{black}%
     \colorlet{xtextcolor}{white}%
     \colorlet{xbgcolor}{white}%
     \colorlet{xemphcolor}{bleu303dark}%
-    \colorlet{xalrtcolor}{rouge485dark}%
+    \colorlet{xalrtcolor}{blocktitlecolordark}%
   }{\ifthenelse{\equal{#1}{lightbw}}{%light b&w
     \colorlet{xfgcolor}{white}%
     \colorlet{xtextcolor}{black}%
     \colorlet{xbgcolor}{black}%
     \colorlet{xemphcolor}{white}%
-    \colorlet{xalrtcolor}{rouge485}%
+    \colorlet{xalrtcolor}{blocktitlecolor}%
   }{%light
     \colorlet{xfgcolor}{white}%
     \colorlet{xtextcolor}{black}%
     \colorlet{xbgcolor}{bleu303dark}%
     \colorlet{xemphcolor}{white}%
-    \colorlet{xalrtcolor}{rouge485}%
+    \colorlet{xalrtcolor}{blocktitlecolor}%
   }}}%
   \colorlet{xfootcolor}{xtextcolor}%
   \setbeamertemplate{background canvas}{%
