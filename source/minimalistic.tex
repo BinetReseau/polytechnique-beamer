@@ -1,0 +1,36 @@
+% vim: expandtab tabstop=2 softtabstop=2 shiftwidth=2
+%\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=43]{beamer}
+\usepackage[frenchb,noconfigs]{babel}
+\usepackage{ifluatex,ifxetex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\fi
+
+%\usepackage[]{beamerx}
+\usepackage[oldscreen]{beamerx}
+\usepackage{lipsum}
+
+\title[\hrulefill{}This will probably be a way too long subtitle, but is wanted, actually]
+      {\hrulefill{}What do you think of my exageratedly long title?}
+      [Wizzilab]
+\author{Clément Durand}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Title}
+  \lipsum[1]
+\end{frame}
+
+\xsection{blue}{Test}
+
+\xsubsection{blue}{Test}{Subtest}
+
+\xsubsection{blue}{Test}{}
+
+\begin{picframe}[lightbw]{light}{Test}
+\end{picframe}
+
+\end{document}
