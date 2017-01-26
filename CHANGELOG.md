@@ -2,6 +2,12 @@
 
 ## 2.2
 
+### 2.2.1
+
+* corrected bug due to empty subtitle
+* added a few ideas
+* changed implementation of the second logo
+
 ### 2.2.0-beta
 
 * Possibility to add the image (logo and name) of another company
