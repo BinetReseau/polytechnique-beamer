@@ -382,13 +382,17 @@
 \newcommand{\nologo}[1]{%
   \renewcommand{\includebeamerxlogo}{\color{white}\includegraphics[height=0.25\paperheight,keepaspectratio]{beamerxlogo}}
 }
+\newlength\logoheight
+\setlength\logoheight{.25\paperheight}
 \nologo{}
 \def\logo{}
-\renewcommand{\logo}[1]{%
+\renewcommand{\logo}[2][1]{%
   \renewcommand{\includebeamerxlogo}{%
-    \begin{minipage}{0.18377693\paperheight}\color{white}\centering%
-      \includegraphics[width=\textwidth,keepaspectratio]{beamerxlogo}\\[0.01250\paperwidth]
-      \includegraphics[width=\textwidth,keepaspectratio]{#1}
+    \begin{minipage}{.25\paperwidth}\flushleft%
+      \includegraphics[height=.25\paperheight,keepaspectratio]{beamerxlogo}\\[0.01250\paperwidth]
+      \setlength\logoheight{#1\logoheight}%
+      \includegraphics[height=\logoheight,keepaspectratio]{#2}
+      \setlength\logoheight{.25\paperheight}
     \end{minipage}
   }%
 }
