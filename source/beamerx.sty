@@ -239,6 +239,10 @@
 % Definition du theme beamer
 %=======================================================================
 %---------- Parametres generaux
+\newcommand\defaultheadcolor{%
+  \colorlet{xhdcolor}{bleu303}%
+}
+\defaultheadcolor%
 \newcommand\resetcolors{%
   \colorlet{xfgcolor}{black}%
   \colorlet{xbgcolor}{white}%
@@ -296,7 +300,7 @@
 \newcommand\includebeamerxsection{%
   \ifnum \thesection>0
     {%
-      \renewcommand\baselinestretch{.5}\color{bleu303}\rule{.8\textwidth}{.5ex}\\[-2ex]
+      \renewcommand\baselinestretch{.5}\color{xhdcolor}\rule{.8\textwidth}{.5ex}\\[-2ex]
       \raisebox{-\height}{%
         \begin{minipage}{\textwidth}\tiny\flushright%
           \hspace*{0mm}\insertsectionHEAD%
@@ -505,6 +509,7 @@
 %               {number}
 %               {title}
 \newcommand{\xsectionframe}[5]{%
+  \colorlet{xhdcolor}{#1}%
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
