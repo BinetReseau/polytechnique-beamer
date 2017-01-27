@@ -11,9 +11,12 @@
 }
 \DeclareOption{simplehead}{%
   \AtEndOfPackage{%
-    \renewcommand{\resetbackgroundcanvas}{%
-      \setbeamertemplate{background canvas}{}
-    }
+    \renewcommand{\includebeamerxarmes}{}%
+  }
+}
+\DeclareOption{notochead}{%
+  \AtEndOfPackage{%
+    \renewcommand{\includebeamerxsection}{}%
   }
 }
 \DeclareOption{simplebloc}{%
@@ -287,13 +290,32 @@
   }
 }
 
+\newcommand\includebeamerxarmes{\color{gris428}\includegraphics[height=\paperheight/6,keepaspectratio]{beamerxarmes}}
+\newcommand\insertsectionHEAD{\expandafter\insertsectionHEADaux\insertsectionhead}
+\newcommand\insertsectionHEADaux[3]{#1{#2}{\MakeUppercase{#3}}}
+\newcommand\includebeamerxsection{%
+  \ifnum \thesection>0
+    {%
+      \renewcommand\baselinestretch{.5}\color{bleu303}\rule{.8\textwidth}{.5ex}\\[-2ex]
+      \raisebox{-\height}{%
+        \begin{minipage}{\textwidth}\tiny\flushright%
+          \hspace*{0mm}\insertsectionHEAD%
+        \end{minipage}%
+      }%
+    }\\[.2ex]%
+  \else%
+  \fi%
+}
 \newcommand\resetbackgroundcanvas{%
   \setbeamertemplate{background canvas}{%
     \setlength{\unitlength}{0.00625\paperwidth}%
     \begin{picture}(160,90)%
       \put(154,84){%
         \makebox(0,0)[rt]{%
-          \color{gris428}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
+          \begin{minipage}{\paperheight/5}\flushright%
+            \includebeamerxsection{}
+            \includebeamerxarmes{}
+          \end{minipage}
         }%
       }%
     \end{picture}%
