@@ -35,7 +35,7 @@ x integration of another logo : stack with horizontal logo of the school        
                                                                                            \____________________________________________________
 
 x integration of a company name : with ÉCOLE POLYTECHNIQUE - COMPANY - ...
-o aspectratio=43 version
+x aspectratio=43 version
 o thank you frame ?
 o study more the colors in picframes
 o switch to beamer theme ?

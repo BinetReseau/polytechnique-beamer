@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerx}[2017/01/26 v2.2.1, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
+\ProvidesPackage{beamerx}[2017/01/31 v2.3.0, standard scientific slideshows layout for Ecole polytechnique (Palaiseau,France).]
 
 %=======================================================================
 % Declaration des options
@@ -11,14 +11,22 @@
 }
 \DeclareOption{simplehead}{%
   \AtEndOfPackage{%
-    \renewcommand{\resetbackgroundcanvas}{%
-      \setbeamertemplate{background canvas}{}
-    }
+    \renewcommand{\includebeamerxarmes}{}%
+  }
+}
+\DeclareOption{notochead}{%
+  \AtEndOfPackage{%
+    \renewcommand{\includebeamerxsection}{}%
   }
 }
 \DeclareOption{simplebloc}{%
   \AtEndOfPackage{%
     \renewcommand{\beamerxblockheader}{}
+  }
+}
+\DeclareOption{oldscreen}{%
+  \AtEndOfPackage{%
+    \oldscreen{}\applyscreen{}%
   }
 }
 \ProcessOptions*
@@ -61,6 +69,31 @@
     ]
   }
 \fi
+%=======================================================================
+% Definition des longueurs
+%=======================================================================
+\newcounter{bmrX}\newcounter{bmrY}
+
+\newcounter{bmrW}\newcounter{bmrH}
+\setcounter{bmrW}{320}
+
+\newcounter{bmrXmargin}
+\setcounter{bmrXmargin}{12}
+\newlength\beamerxmargin%
+\setlength\beamerxmargin{\thebmrXmargin\paperwidth/\thebmrW} % 6 units
+
+\newcounter{bmrTPmargin}
+\setcounter{bmrTPmargin}{6}
+
+\newcommand\oldscreen{% 4:3 ratio
+  \setcounter{bmrH}{240}
+}
+\newcommand\newscreen{% 16:9 ratio
+  \setcounter{bmrH}{180}
+}
+\newcommand\applyscreen{%
+}
+\newscreen{}\applyscreen{}
 %=======================================================================
 % Definition des couleurs
 %=======================================================================
@@ -236,6 +269,10 @@
 % Definition du theme beamer
 %=======================================================================
 %---------- Parametres generaux
+\newcommand\defaultheadcolor{%
+  \colorlet{xhdcolor}{bleu303}%
+}
+\defaultheadcolor%
 \newcommand\resetcolors{%
   \colorlet{xfgcolor}{black}%
   \colorlet{xbgcolor}{white}%
@@ -247,8 +284,6 @@
 }
 \resetcolors%
 
-\newlength\beamerxmargin%
-\setlength\beamerxmargin{\textheight/15} % 6 units
 \setbeamercovered{transparent=40}
 \setlength\fboxsep{1ex}
 
@@ -287,13 +322,33 @@
   }
 }
 
+\newcommand\includebeamerxarmes{\color{gris428}\includegraphics[height=\paperheight/6,keepaspectratio]{beamerxarmes}}
+\newcommand\insertsectionHEAD{\expandafter\insertsectionHEADaux\insertsectionhead}
+\newcommand\insertsectionHEADaux[3]{#1{#2}{\MakeUppercase{#3}}}
+\newcommand\includebeamerxsection{%
+  \ifnum \thesection>0
+    {%
+      \renewcommand\baselinestretch{.5}\color{xhdcolor}\rule{.8\textwidth}{.5ex}\\[-2ex]
+      \raisebox{-\height}{%
+        \begin{minipage}{\textwidth}\tiny\flushright%
+          \hspace*{0mm}\insertsectionHEAD%
+        \end{minipage}%
+      }%
+    }\\[.2ex]%
+  \else%
+  \fi%
+}
 \newcommand\resetbackgroundcanvas{%
   \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(154,84){%
+    \setlength{\unitlength}{\paperwidth/\thebmrW}%
+    \begin{picture}(\thebmrW,\thebmrH)%
+      \setcounter{bmrX}{\thebmrW-\thebmrXmargin}\setcounter{bmrY}{\thebmrH-\thebmrXmargin}%
+      \put(\thebmrX,\thebmrY){%
         \makebox(0,0)[rt]{%
-          \color{gris428}\includegraphics[height=\paperheight/7,keepaspectratio]{beamerxarmes}%
+          \begin{minipage}{\paperheight/5}\flushright%
+            \includebeamerxsection{}
+            \includebeamerxarmes{}
+          \end{minipage}
         }%
       }%
     \end{picture}%
@@ -398,35 +453,39 @@
 }
 \AtBeginDocument{%
   \renewcommand\maketitle{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
+    \setlength{\unitlength}{\paperwidth/\thebmrW}%
     \setbeamertemplate{background canvas}{%
       \color{white}%
-      \begin{picture}(160,90)%
-        \put(80,45){%
+      \begin{picture}(\thebmrW,\thebmrH)%
+        \setcounter{bmrX}{\thebmrW/2}\setcounter{bmrY}{\thebmrH/2}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[c]{%
-            \includegraphics[width=\paperwidth,keepaspectratio]{beamerxbackground}%
+            \includegraphics[height=\paperheight,keepaspectratio]{beamerxbackground}%
           }%
         }%
-        \put(6,45){%
+        \setcounter{bmrX}{2*\thebmrTPmargin}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[l]{%
             \includebeamerxlogo{}%
           }%
         }%
-        \put(3,3){%
+        \put(\thebmrTPmargin,\thebmrTPmargin){%
           \makebox(0,0)[lb]{%
-            \begin{minipage}{0.5\paperwidth}\noindent%
+            \begin{minipage}{.5\paperwidth}\noindent%
               \sffamily\footnotesize\polyauteursave\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
-        \put(157,3){%
+        \setcounter{bmrX}{\thebmrW-\thebmrTPmargin}%
+        \put(\thebmrX,\thebmrTPmargin){%
           \makebox(0,0)[rb]{%
-            \begin{minipage}{0.5\paperwidth}\noindent\flushright%
+            \begin{minipage}{.5\paperwidth}\noindent\flushright%
               \sffamily\footnotesize\polydatesave\hspace*{0pt}%
             \end{minipage}%
           }%
         }%
-        \put(157,46){%
+        \setcounter{bmrY}{\thebmrY+1}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[rb]{%
             \begin{minipage}{0.75\paperwidth}\noindent\flushright%
               \Large\setlength{\baselineskip}{0.7\baselineskip}%
@@ -434,7 +493,8 @@
             \end{minipage}%
           }%
         }%
-        \put(157,47){%
+        \setcounter{bmrY}{\thebmrY+1}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[rt]{%
             \begin{minipage}{0.75\paperwidth}\noindent\flushright%
               \setlength{\baselineskip}{0.7\baselineskip}%
@@ -483,19 +543,23 @@
 %               {number}
 %               {title}
 \newcommand{\xsectionframe}[5]{%
+  \colorlet{xhdcolor}{#1}%
   \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(80,0){%
+    \setlength{\unitlength}{\paperwidth/\thebmrW}%
+    \begin{picture}(\thebmrW,\thebmrH)%
+      \setcounter{bmrX}{\thebmrW/2}%
+      \put(\thebmrX,0){%
         \makebox(0,0)[cb]{%
           \includegraphics[width=\paperwidth,keepaspectratio]{#3}%
         }%
       }%
-      \put(0,60){%
+      \setcounter{bmrY}{2*\thebmrH/3}%
+      \put(0,\thebmrY){%
         \color{#1}\rule{\paperwidth}{\paperheight/3}%
       }%
+      \setcounter{bmrY}{5*\thebmrH/6}%
       \ifthenelse{\equal{#4}{}}{%
-        \put(80,75){%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[c]{%
             \begin{minipage}{140\unitlength}\centering%
               \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
@@ -503,14 +567,15 @@
           }%
         }%
       }{%
-        \put(80,75){%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[cb]{%
             \begin{minipage}{140\unitlength}\centering%
               \Huge\sffamily\color{#2}#4%
             \end{minipage}%
           }%
         }%
-        \put(80,70){%
+        \setcounter{bmrY}{\thebmrY-5}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[ct]{%
             \begin{minipage}{140\unitlength}\centering%
               \Large\sffamily\color{#2}\MakeUppercaseWithNewline{#5}%
@@ -561,50 +626,56 @@
 %                  {subtitle}
 \newcommand{\xsubsectionframe}[6]{%
   \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(80,90){%
+    \setlength{\unitlength}{\paperwidth/\thebmrW}%
+    \begin{picture}(\thebmrW,\thebmrH)%
+      \setcounter{bmrX}{\thebmrW/2}%
+      \put(\thebmrX,\thebmrH){%
         \makebox(0,0)[ct]{%
           \includegraphics[width=\paperwidth,keepaspectratio]{#4}%
         }%
       }%
       \put(0,0){%
-        \color{#1}\rule{\paperwidth}{0.5\paperheight}%
+        \color{#1}\rule{\paperwidth}{.5\paperheight}%
       }%
-      \put(160,22.5){%
+      \setcounter{bmrY}{\thebmrH/4}%
+      \put(\thebmrW,\thebmrY){% TODO
         \makebox(0,0)[c]{%
           \color{#2}\includegraphics[height=3\paperheight/7,keepaspectratio]{beamerxarmes}%
         }%
       }%
       \ifthenelse{\equal{#6}{}}{%
-        \put(80,21){%
+        \setcounter{bmrY}{\thebmrY-3}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[ct]{%
             \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
           }%
         }%
-        \put(80,24){%
+        \setcounter{bmrY}{\thebmrY+6}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[cb]{%
-            \begin{minipage}{120\unitlength}\centering%
+            \begin{minipage}{.75\paperwidth}\centering%
               \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
             \end{minipage}%
           }%
         }%
       }{%
-        \put(80,22.5){%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[c]{%
             \color{#3}\includegraphics[height=\paperheight/22,keepaspectratio]{beamerxx}%
           }%
         }%
-        \put(80,28){%
+        \setcounter{bmrY}{\thebmrY+11}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[cb]{%
-            \begin{minipage}{120\unitlength}\centering%
+            \begin{minipage}{.75\paperwidth}\centering%
               \large\rmfamily\bfseries\color{#3}\MakeUppercaseWithNewline{#5}%
             \end{minipage}%
           }%
         }%
-        \put(80,18){%
+        \setcounter{bmrY}{\thebmrY-22}%
+        \put(\thebmrX,\thebmrY){%
           \makebox(0,0)[ct]{%
-            \begin{minipage}{120\unitlength}\centering%
+            \begin{minipage}{.75\paperwidth}\centering%
               \large\rmfamily\color{#3}#6%
             \end{minipage}%
           }%
@@ -624,9 +695,10 @@
 %       {picture}
 \newenvironment{xpic}[2][hw]{%
   \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(80,45){%
+    \setlength{\unitlength}{\paperwidth/\thebmrW}%
+    \begin{picture}(\thebmrW,\thebmrH)%
+      \setcounter{bmrX}{\thebmrW/2}\setcounter{bmrY}{\thebmrH/2}%
+      \put(\thebmrX,\thebmrY){%
         \makebox(0,0)[c]{%
           \ifthenelse{\equal{#1}{w}}{%
             \includegraphics[width=\paperwidth]{#2}%
@@ -653,9 +725,15 @@
 %       [frame parameters]
 %       {title}
 \newsavebox\beamerxpicturebox%
+\newlength\beamerxpictureboxH%
+\newlength\beamerxpictureboxW%
 \newcommand\includefullpic[1]{%
-  \sbox\beamerxpicturebox{\includegraphics{#1}}%
-  \ifdim\ht\beamerxpicturebox<.5625\wd\beamerxpicturebox%
+  \sbox\beamerxpicturebox{\includegraphics[width=1cm]{#1}}%
+  \setlength\beamerxpictureboxH{\ht\beamerxpicturebox}%
+  \setlength\beamerxpictureboxW{\wd\beamerxpicturebox}%
+  \setlength\beamerxpictureboxW{\beamerxpictureboxW/\thebmrW}%
+  \setlength\beamerxpictureboxW{\thebmrH\beamerxpictureboxW}%
+  \ifdim\beamerxpictureboxH<\beamerxpictureboxW%
     \includegraphics[height=\paperheight]{#1}%
   \else%
     \includegraphics[width=\paperwidth]{#1}%
@@ -689,9 +767,10 @@
   }}}%
   \colorlet{xfootcolor}{xtextcolor}%
   \setbeamertemplate{background canvas}{%
-    \setlength{\unitlength}{0.00625\paperwidth}%
-    \begin{picture}(160,90)%
-      \put(80,45){%
+    \setlength{\unitlength}{\paperwidth/\thebmrW}%
+    \begin{picture}(\thebmrW,\thebmrH)%
+      \setcounter{bmrX}{\thebmrW/2}\setcounter{bmrY}{\thebmrH/2}%
+      \put(\thebmrX,\thebmrY){%
         \makebox(0,0)[c]{%
           \includefullpic{#2}%
         }%

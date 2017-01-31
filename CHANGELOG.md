@@ -1,5 +1,12 @@
 # 2
 
+## 2.3
+
+### 2.3.0
+
+* Aspect ratio 4:3 now available (default is still 16:9 and advised)
+* Section title in the header
+
 ## 2.2
 
 ### 2.2.1
