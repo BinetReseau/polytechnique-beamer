@@ -325,7 +325,7 @@
   }
 }
 
-\newcommand\includebeamerxarmes{\color{gris428}\includegraphics[height=\paperheight/6,keepaspectratio]{beamerxarmes}}
+\newcommand\includebeamerxarmes{\color{gris428}\includegraphics[height=\paperheight/6,keepaspectratio]{\polylogoframe}}
 \newcommand\insertsectionHEAD{\expandafter\insertsectionHEADaux\insertsectionhead}
 \newcommand\insertsectionHEADaux[3]{#1{#2}{\MakeUppercase{#3}}}
 \newcommand\includebeamerxsection{%
@@ -398,6 +398,7 @@
 \def\polyauteursave{}
 \def\polydatesave{\today}
 \def\polylogosave{beamerxlogo}
+\def\polylogoframe{beamerxarmes}
 \def\polybackgroundsave{beamerxbackground}
 \def\polylogocolor{white}
 \def\polytitlefontcolor{white}
@@ -442,6 +443,10 @@
 \let\oldlogo=\logo
 \renewcommand\logo[1]{%
     \renewcommand\polylogosave{#1}
+}
+
+\newcommand\logoframe[1]{%
+    \renewcommand\polylogoframe{#1}
 }
 
 \newcommand\background[1]{%
